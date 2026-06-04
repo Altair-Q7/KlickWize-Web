@@ -1,0 +1,127 @@
+/* =====================================================
+   GLOBAL RESET
+===================================================== */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--ff-body);
+  overflow-x:hidden;
+}
+
+/* =====================================================
+   SECTION SPACING
+===================================================== */
+
+section{
+  padding:var(--space-2xl) var(--space-md);
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+  width:min(100%, var(--container));
+  margin-inline:auto;
+}
+
+/* =====================================================
+   HERO LAYOUT
+===================================================== */
+
+#hero{
+  min-height:100vh;
+
+  display:grid;
+
+  grid-template-columns:
+    1.3fr
+    0.7fr;
+
+  align-items:center;
+
+  gap:4rem;
+}
+
+/* =====================================================
+   PLACEHOLDER BOXES
+===================================================== */
+
+.hero-content,
+.hero-brand,
+#about,
+#services,
+#process,
+#why,
+#cta,
+footer{
+
+  border:1px solid var(--edge);
+  padding:2rem;
+}
+
+.hero-content h1{
+  font-size:clamp(4rem,10vw,8rem);
+  line-height:.9;
+  font-family:var(--ff-display);
+}
+
+.hero-content p{
+  margin-top:1rem;
+  color:var(--muted);
+  max-width:500px;
+}
+
+.hero-content button{
+  margin-top:2rem;
+  padding:1rem 2rem;
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+header{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+
+  z-index:1000;
+}
+
+.navbar{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  min-height:80px;
+}
+
+.nav-links{
+
+  display:flex;
+
+  gap:2rem;
+
+  list-style:none;
+}
