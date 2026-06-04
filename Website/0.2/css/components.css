@@ -1,3 +1,69 @@
+.hero-title{
+
+  font-family:
+    var(--ff-display);
+
+  font-size:
+    var(--fs-hero);
+
+  line-height:
+    .85;
+
+  text-transform:
+    uppercase;
+
+  margin-bottom:
+    1rem;
+}
+.hero-line{
+
+  display:block;
+}
+.hero-description{
+
+  max-width:600px;
+
+  color:var(--muted);
+
+  font-size:1.2rem;
+
+  line-height:1.8;
+
+  margin-bottom:2rem;
+}
+.hero-brand{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:
+    var(--gradient-surface);
+
+  border:
+    1px solid var(--glass-border);
+
+  border-radius:
+    var(--radius-lg);
+
+  backdrop-filter:
+    blur(12px);
+
+  box-shadow:
+    var(--shadow-md);
+
+  padding:
+    3rem;
+}
+.hero-brand img{
+
+  max-width:100%;
+
+  filter:
+    drop-shadow(0 0 40px rgba(0,212,255,.25));
+}
 /* =====================================================
    LOGO
 ===================================================== */
@@ -8,11 +74,26 @@
 
   font-size:2rem;
 
-  letter-spacing:.1em;
+  font-weight:700;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
 
   color:var(--white);
+
+  text-decoration:none;
+
+  transition:var(--transition);
 }
 
+.logo:hover{
+
+  color:var(--cyan);
+
+  text-shadow:
+    0 0 20px var(--cyan-glow);
+}
 /* =====================================================
    NAV LINKS
 ===================================================== */
@@ -34,22 +115,82 @@
 }
 
 /* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-height:44px;
+
+  padding:.9rem 1.5rem;
+
+  border:1px solid transparent;
+
+  font-family:var(--ff-mono);
+
+  font-size:.85rem;
+
+  font-weight:700;
+
+  line-height:1;
+
+  text-decoration:none;
+
+  cursor:pointer;
+
+  transition:background var(--duration-fast),border-color var(--duration-fast),color var(--duration-fast),transform var(--duration-fast),box-shadow var(--duration-normal);
+}
+
+.btn-primary{
+
+  background:var(--gradient-primary);
+
+  color:var(--black);
+
+  border:none;
+
+  box-shadow:var(--shadow-sm);
+}
+
+.btn-primary:hover{
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    var(--shadow-md),
+    var(--glow-md);
+}
+
+.btn-secondary{
+
+  border-color:var(--edge);
+
+  background:transparent;
+
+  color:var(--muted);
+}
+
+.btn-secondary:hover{
+
+  border-color:var(--cyan);
+
+  color:var(--white);
+}
+
+/* =====================================================
    CTA BUTTON
 ===================================================== */
 
 .nav-cta{
 
-  border:none;
-
-  padding:.9rem 1.5rem;
-
-  background:var(--cyan);
-
-  color:var(--black);
-
-  cursor:pointer;
-
-  font-weight:700;
+  white-space:nowrap;
 }
 
 /* =====================================================
@@ -58,17 +199,38 @@
 
 .section-label{
 
-  display:block;
+  display:inline-block;
 
-  color:var(--cyan);
+  padding:
+    .5rem 1rem;
 
-  font-family:var(--ff-mono);
+  border:
+    1px solid var(--glass-border);
 
-  margin-bottom:1rem;
+  background:
+    var(--glass);
 
-  letter-spacing:.2em;
+  backdrop-filter:
+    blur(10px);
+
+  border-radius:
+    999px;
+
+  color:
+    var(--cyan);
+
+  font-family:
+    var(--ff-mono);
+
+  letter-spacing:
+    .2em;
+
+  text-transform:
+    uppercase;
+
+  margin-bottom:
+    1.5rem;
 }
-
 /* =====================================================
    ABOUT
 ===================================================== */
@@ -124,13 +286,25 @@
 
 .service-card{
 
-  background:var(--panel);
+  position:relative;
 
-  border:1px solid var(--edge);
+  background:
+    var(--gradient-surface);
+
+  backdrop-filter:
+    blur(10px);
+
+  border:
+    1px solid var(--glass-border);
+
+  border-radius:
+    var(--radius-md);
 
   padding:2rem;
 
-  transition:.3s;
+  overflow:hidden;
+
+  transition:var(--transition);
 }
 
 .service-card:hover{
@@ -161,6 +335,32 @@
   color:var(--muted);
 
   line-height:1.7;
+}
+
+.service-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+
+  height:2px;
+
+  background:
+    var(--gradient-primary);
+
+  opacity:0;
+
+  transition:var(--transition);
+}
+
+.service-card:hover::before{
+
+  opacity:1;
 }
 
 /* =====================================================
@@ -292,19 +492,7 @@
 
 .cta-button{
 
-  border:none;
-
   padding:1rem 2rem;
-
-  background:var(--cyan);
-
-  color:var(--black);
-
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.3s;
 }
 
 .cta-button:hover{

@@ -19,6 +19,7 @@ body{
   color:var(--white);
   font-family:var(--ff-body);
   overflow-x:hidden;
+  line-height:1.6;
 }
 
 /* =====================================================
@@ -85,9 +86,11 @@ footer{
   max-width:500px;
 }
 
-.hero-content button{
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
   margin-top:2rem;
-  padding:1rem 2rem;
 }
 
 /* =====================================================
