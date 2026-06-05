@@ -235,6 +235,12 @@
   animation-delay: calc(var(--char-index) * 18ms + var(--line-index) * 90ms);
 }
 
+.hero-title .accent,
+.hero-title .accent .char {
+  -webkit-text-stroke: 1px var(--cyan);
+  color: transparent;
+}
+
 .rotating-line {
   min-height: 32px;
   display: flex;

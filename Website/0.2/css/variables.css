@@ -34,9 +34,9 @@
   --glass-border: rgba(255, 255, 255, .1);
 
   /* Fonts */
-  --ff-display: "Oxanium", system-ui, sans-serif;
+  --ff-display: 'Bebas Neue', "Oxanium", system-ui, sans-serif;
   --ff-body: "Inter", system-ui, sans-serif;
-  --ff-mono: "JetBrains Mono", monospace;
+  --ff-mono: 'DM Mono', "JetBrains Mono", monospace;
 
   /* Sizing */
   --container: 1180px;
