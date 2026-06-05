@@ -1,29 +1,54 @@
 /* =====================================================
-   KLICKWIZE 0.2
-   Design System Variables
+   KLICKWIZE 0.2 - DESIGN SYSTEM VARIABLES
+
+   This file is the website's control panel.
+   Change colors, fonts, spacing, shadows, and animation
+   timing here so the rest of the CSS can reuse the same
+   values instead of repeating them everywhere.
 ===================================================== */
 
 :root {
 
   /* ==================================================
-     COLORS
+     BASE COLORS
+
+     These are the main paint colors for the website.
+     Dark colors create the cyber/tech background.
+     Bright cyan is the main highlight color.
   ================================================== */
 
+  /* Almost black: the main page background. */
   --black: #03050a;
+
+  /* Very dark blue: used when the page needs a soft dark layer. */
   --deep: #080c14;
+
+  /* Dark surface: used for larger content areas. */
   --surface: #0d1220;
+
+  /* Panel color: used for cards and boxes. */
   --panel: #121926;
 
+  /* Edge color: the thin border around boxes and buttons. */
   --edge: #1a2535;
 
+  /* Bright cyan: the brand accent, like a neon highlight. */
   --cyan: #00d4ff;
+
+  /* Dim cyan: a calmer version of the brand accent. */
   --cyan-dim: #0099bb;
 
+  /* Soft white: readable text without being harsh. */
   --white: #e8eef8;
+
+  /* Muted blue-gray: secondary text that should feel quieter. */
   --muted: #6a788d;
 
   /* ==================================================
      GLOWS
+
+     Glow colors create the soft neon light effect.
+     The lower the number after the comma, the softer the glow.
   ================================================== */
 
   --cyan-glow: rgba(0,212,255,.15);
@@ -31,6 +56,10 @@
 
   /* ==================================================
      TYPOGRAPHY
+
+     These are the font families used across the page.
+     Display = big titles, Body = normal reading text,
+     Mono = technical labels and small navigation text.
   ================================================== */
 
   --ff-display: 'Oxanium', sans-serif;
@@ -39,6 +68,9 @@
 
   /* ==================================================
      SPACING
+
+     These control empty space between elements.
+     xs is small spacing; 2xl is very large spacing.
   ================================================== */
 
   --space-xs: .5rem;
@@ -50,13 +82,19 @@
 
   /* ==================================================
      CONTAINERS
+
+     Containers stop the content from becoming too wide
+     on large screens, keeping it readable.
   ================================================== */
 
-  --container: 1400px;
+  --container: 1280px;
   --container-small: 900px;
 
   /* ==================================================
      BORDERS
+
+     Radius means roundness. A larger radius makes boxes
+     and cards look more rounded.
   ================================================== */
 
   --radius-sm: 8px;
@@ -65,6 +103,9 @@
 
   /* ==================================================
      ANIMATIONS
+
+     These values control how quickly hover and movement
+     effects happen.
   ================================================== */
 
   --ease:
@@ -74,9 +115,11 @@
   --duration-normal: .45s;
   --duration-slow: .8s;
 
-/* ==================================================
-   PRIMARY BRAND COLORS
-================================================== */
+  /* ==================================================
+     PRIMARY BRAND COLORS
+
+     Extra accent colors for gradients and highlights.
+  ================================================== */
 
   --cyan-bright: #5ae6ff;
   --cyan-dark: #0099bb;
@@ -84,9 +127,11 @@
   --blue: #3b82f6;
   --blue-dark: #1d4ed8;
 
-/* ==================================================
-   ATMOSPHERE
-================================================== */
+  /* ==================================================
+     ATMOSPHERE
+
+     These add glass, grid, and futuristic background detail.
+  ================================================== */
 
   --grid-line: rgba(255,255,255,.03);
 
@@ -94,9 +139,11 @@
 
   --glass-border: rgba(255,255,255,.08);
 
-/* ==================================================
-   GLOW SYSTEM
-================================================== */
+  /* ==================================================
+     GLOW SYSTEM
+
+     Reusable shadow glows. Small is subtle, large is bold.
+  ================================================== */
 
   --glow-sm: 0 0 20px rgba(0,212,255,.15);
 
@@ -104,9 +151,12 @@
 
   --glow-lg: 0 0 80px rgba(0,212,255,.30);
 
-/* ==================================================
-   TYPE SCALE
-================================================== */
+  /* ==================================================
+     TYPE SCALE
+
+     Reusable font sizes. The hero size uses clamp(),
+     which means it grows or shrinks depending on screen size.
+  ================================================== */
 
   --fs-xs: .875rem;
   --fs-sm: 1rem;
@@ -116,32 +166,36 @@
 
   --fs-hero: clamp(5rem,12vw,12rem);
 
-/* ==================================================
-   SHADOWS
-================================================== */
+  /* ==================================================
+     SHADOWS
 
---shadow-sm:
+     Shadows make cards and buttons look lifted from the page.
+  ================================================== */
+
+  --shadow-sm:
   0 10px 30px rgba(0,0,0,.25);
 
---shadow-md:
+  --shadow-md:
   0 20px 50px rgba(0,0,0,.40);
 
---shadow-lg:
+  --shadow-lg:
   0 30px 80px rgba(0,0,0,.55);
 
 
-/* ==================================================
-   GRADIENTS
-================================================== */
+  /* ==================================================
+     GRADIENTS
 
---gradient-primary:
+     Gradients blend colors together instead of using one flat color.
+  ================================================== */
+
+  --gradient-primary:
   linear-gradient(
     135deg,
     var(--cyan),
     var(--blue)
   );
 
---gradient-surface:
+  --gradient-surface:
   linear-gradient(
     180deg,
     rgba(255,255,255,.03),
@@ -149,11 +203,13 @@
   );
 
 
-/* ==================================================
-   TRANSITIONS
-================================================== */
+  /* ==================================================
+     TRANSITIONS
 
---transition:
+     The default motion rule reused by buttons, cards, and links.
+  ================================================== */
+
+  --transition:
   all var(--duration-normal)
   var(--ease);
 }

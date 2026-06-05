@@ -1,3 +1,18 @@
+/* =====================================================
+   COMPONENTS
+
+   This file styles reusable website pieces: logo, buttons,
+   cards, section labels, and footer content. Layout rules
+   live in layout.css; shared colors and sizes live in variables.css.
+===================================================== */
+
+/* =====================================================
+   HERO TEXT AND BRAND CARD
+
+   These classes control the large SECURE / BUILD / GROW
+   headline and the logo card beside it.
+===================================================== */
+
 .hero-title{
 
   font-family:
@@ -17,6 +32,7 @@
 }
 .hero-line{
 
+  /* Each word gets its own line instead of flowing in one sentence. */
   display:block;
 }
 .hero-description{
@@ -33,6 +49,7 @@
 }
 .hero-brand{
 
+  /* Centers the logo inside the glass-style card. */
   display:flex;
 
   justify-content:center;
@@ -42,6 +59,7 @@
   background:
     var(--gradient-surface);
 
+  /* Thin glass border around the brand card. */
   border:
     1px solid var(--glass-border);
 
@@ -51,6 +69,7 @@
   backdrop-filter:
     blur(12px);
 
+  /* Shadow makes the card feel raised from the dark background. */
   box-shadow:
     var(--shadow-md);
 
@@ -61,11 +80,14 @@
 
   max-width:100%;
 
+  /* Cyan glow around the logo for the cyber-style look. */
   filter:
     drop-shadow(0 0 40px rgba(0,212,255,.25));
 }
 /* =====================================================
    LOGO
+
+   The clickable KLICKWIZE wordmark in the navigation bar.
 ===================================================== */
 
 .logo{
@@ -96,6 +118,8 @@
 }
 /* =====================================================
    NAV LINKS
+
+   The About / Services / Process / Why Us links.
 ===================================================== */
 
 .nav-links a{
@@ -116,10 +140,14 @@
 
 /* =====================================================
    BUTTONS
+
+   Base .btn sets the shared button shape.
+   .btn-primary and .btn-secondary choose the visual style.
 ===================================================== */
 
 .btn{
 
+  /* Inline-flex keeps button text centered vertically and horizontally. */
   display:inline-flex;
 
   align-items:center;
@@ -149,6 +177,7 @@
 
 .btn-primary{
 
+  /* Main action button: bright gradient, used for important clicks. */
   background:var(--gradient-primary);
 
   color:var(--black);
@@ -170,6 +199,7 @@
 
 .btn-secondary{
 
+  /* Secondary button: quieter outline style for less urgent actions. */
   border-color:var(--edge);
 
   background:transparent;
@@ -186,6 +216,8 @@
 
 /* =====================================================
    CTA BUTTON
+
+   The navigation call-to-action should stay on one line.
 ===================================================== */
 
 .nav-cta{
@@ -195,6 +227,8 @@
 
 /* =====================================================
    SECTION LABEL
+
+   Small pill-shaped labels such as SERVICES and PROCESS.
 ===================================================== */
 
 .section-label{
@@ -233,6 +267,8 @@
 }
 /* =====================================================
    ABOUT
+
+   Text styles for the company overview section.
 ===================================================== */
 
 .about-content h2{
@@ -259,6 +295,8 @@
 
 /* =====================================================
    SECTION TITLES
+
+   Large headings reused across page sections.
 ===================================================== */
 
 .section-title{
@@ -272,10 +310,14 @@
 
 /* =====================================================
    SERVICES
+
+   The services grid holds six service cards.
+   Each card explains one business capability.
 ===================================================== */
 
 .services-grid{
 
+  /* Three equal columns on desktop. */
   display:grid;
 
   grid-template-columns:
@@ -286,6 +328,7 @@
 
 .service-card{
 
+  /* Relative positioning lets the card's top glow line sit inside the card. */
   position:relative;
 
   background:
@@ -339,6 +382,7 @@
 
 .service-card::before{
 
+  /* Decorative top line that appears when the card is hovered. */
   content:"";
 
   position:absolute;
@@ -365,10 +409,14 @@
 
 /* =====================================================
    PROCESS
+
+   The process timeline shows the order of work from
+   discovery to growth.
 ===================================================== */
 
 .process-timeline{
 
+  /* Lays process steps horizontally across the page. */
   position:relative;
 
   display:flex;
@@ -389,6 +437,7 @@
 
 .step-dot{
 
+  /* Small cyan dot that marks each step in the process. */
   width:18px;
   height:18px;
 
@@ -415,10 +464,13 @@
 
 /* =====================================================
    WHY US
+
+   Cards that explain why someone should choose KLICKWIZE.
 ===================================================== */
 
 .why-grid{
 
+  /* Two-column card layout on desktop. */
   display:grid;
 
   grid-template-columns:
@@ -459,6 +511,9 @@
 
 /* =====================================================
    CTA
+
+   Final call-to-action section that encourages visitors
+   to start a project.
 ===================================================== */
 
 .cta-content{
@@ -501,6 +556,8 @@
 }
 /* =====================================================
    FOOTER
+
+   Bottom area with brand name, quick links, and tagline.
 ===================================================== */
 
 footer{
