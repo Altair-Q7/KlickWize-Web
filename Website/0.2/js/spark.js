@@ -15,6 +15,8 @@
   let width = 0;
   let height = 0;
   let points = [];
+  let lastScrollY = window.scrollY;
+  let scrollVelocity = 0;
 
   function fitCanvas() {
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -48,6 +50,11 @@
   }
 
   function draw() {
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
+    lastScrollY = currentScrollY;
+    scrollVelocity += (scrollDelta - scrollVelocity) * 0.12;
+
     ctx.clearRect(0, 0, width, height);
 
     points.forEach((point, index) => {
@@ -80,8 +87,8 @@
       ctx.fill();
 
       if (!prefersReducedMotion) {
-        point.x += point.vx;
-        point.y += point.vy;
+        point.x += point.vx + scrollVelocity * 0.12;
+        point.y += point.vy + scrollVelocity * 0.08;
       }
 
       if (point.x < -10) point.x = width + 10;
