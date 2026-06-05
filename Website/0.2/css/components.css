@@ -1,600 +1,606 @@
 /* =====================================================
-   COMPONENTS
+   COMPONENT STYLES
 
-   This file styles reusable website pieces: logo, buttons,
-   cards, section labels, and footer content. Layout rules
-   live in layout.css; shared colors and sizes live in variables.css.
+   A component is a reusable website part:
+   button, card, menu, stepper, form, logo lockup, etc.
 ===================================================== */
 
 /* =====================================================
-   HERO TEXT AND BRAND CARD
-
-   These classes control the large SECURE / BUILD / GROW
-   headline and the logo card beside it.
+   BRAND / LOGO
 ===================================================== */
 
-.hero-title{
-
-  font-family:
-    var(--ff-display);
-
-  font-size:
-    var(--fs-hero);
-
-  line-height:
-    .85;
-
-  text-transform:
-    uppercase;
-
-  margin-bottom:
-    1rem;
+.brand-mark,
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  color: var(--white);
+  text-decoration: none;
 }
-.hero-line{
 
-  /* Each word gets its own line instead of flowing in one sentence. */
-  display:block;
+.brand-mark img,
+.footer-brand img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border: 1px solid var(--edge-strong);
+  border-radius: 14px;
+  background: var(--deep);
+  box-shadow: var(--glow-cyan);
 }
-.hero-description{
 
-  max-width:600px;
-
-  color:var(--muted);
-
-  font-size:1.2rem;
-
-  line-height:1.8;
-
-  margin-bottom:2rem;
+.brand-mark strong,
+.footer-brand span {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: 1.15rem;
+  letter-spacing: .14em;
 }
-.hero-brand{
 
-  /* Centers the logo inside the glass-style card. */
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  background:
-    var(--gradient-surface);
-
-  /* Thin glass border around the brand card. */
-  border:
-    1px solid var(--glass-border);
-
-  border-radius:
-    var(--radius-lg);
-
-  backdrop-filter:
-    blur(12px);
-
-  /* Shadow makes the card feel raised from the dark background. */
-  box-shadow:
-    var(--shadow-md);
-
-  padding:
-    3rem;
+.brand-mark small {
+  display: block;
+  margin-top: .12rem;
+  color: var(--muted);
+  font-family: var(--ff-mono);
+  font-size: .58rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
 }
-.hero-brand img{
 
-  max-width:100%;
-
-  /* Cyan glow around the logo for the cyber-style look. */
-  filter:
-    drop-shadow(0 0 40px rgba(0,212,255,.25));
+.brand-klick {
+  color: var(--white);
 }
+
+.brand-wize {
+  color: var(--cyan);
+}
+
 /* =====================================================
-   LOGO
-
-   The clickable KLICKWIZE wordmark in the navigation bar.
+   PILL NAVIGATION
 ===================================================== */
 
-.logo{
-
-  font-family:var(--ff-display);
-
-  font-size:2rem;
-
-  font-weight:700;
-
-  letter-spacing:.15em;
-
-  text-transform:uppercase;
-
-  color:var(--white);
-
-  text-decoration:none;
-
-  transition:var(--transition);
+.pill-nav {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .35rem;
+  list-style: none;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .04);
+  backdrop-filter: blur(16px);
 }
 
-.logo:hover{
-
-  color:var(--cyan);
-
-  text-shadow:
-    0 0 20px var(--cyan-glow);
-}
-/* =====================================================
-   NAV LINKS
-
-   The About / Services / Process / Why Us links.
-===================================================== */
-
-.nav-links a{
-
-  text-decoration:none;
-
-  color:var(--muted);
-
-  font-family:var(--ff-mono);
-
-  transition:.3s;
+.pill-nav a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: var(--ff-mono);
+  font-size: .78rem;
+  text-decoration: none;
+  transition: color var(--duration-fast), background var(--duration-fast), box-shadow var(--duration-fast);
 }
 
-.nav-links a:hover{
+.pill-nav a:hover,
+.pill-nav a.active {
+  color: var(--black);
+  background: var(--cyan);
+  box-shadow: 0 0 24px rgba(0, 212, 255, .25);
+}
 
-  color:var(--cyan);
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: var(--glass);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform var(--duration-fast);
+}
+
+.menu-toggle[aria-expanded="true"] span:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+.staggered-menu {
+  display: none;
 }
 
 /* =====================================================
    BUTTONS
-
-   Base .btn sets the shared button shape.
-   .btn-primary and .btn-secondary choose the visual style.
 ===================================================== */
 
-.btn{
-
-  /* Inline-flex keeps button text centered vertically and horizontally. */
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  min-height:44px;
-
-  padding:.9rem 1.5rem;
-
-  border:1px solid transparent;
-
-  font-family:var(--ff-mono);
-
-  font-size:.85rem;
-
-  font-weight:700;
-
-  line-height:1;
-
-  text-decoration:none;
-
-  cursor:pointer;
-
-  transition:background var(--duration-fast),border-color var(--duration-fast),color var(--duration-fast),transform var(--duration-fast),box-shadow var(--duration-normal);
+.btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 0 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--ff-mono);
+  font-size: .82rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast), box-shadow var(--duration-normal), background var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast);
 }
 
-.btn-primary{
-
-  /* Main action button: bright gradient, used for important clicks. */
-  background:var(--gradient-primary);
-
-  color:var(--black);
-
-  border:none;
-
-  box-shadow:var(--shadow-sm);
+.btn-primary {
+  color: #021013;
+  background: var(--gradient-primary);
+  box-shadow: var(--shadow-sm), 0 0 28px rgba(0, 212, 255, .18);
 }
 
-.btn-primary:hover{
-
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    var(--shadow-md),
-    var(--glow-md);
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), var(--glow-cyan);
 }
 
-.btn-secondary{
-
-  /* Secondary button: quieter outline style for less urgent actions. */
-  border-color:var(--edge);
-
-  background:transparent;
-
-  color:var(--muted);
+.btn-secondary,
+.btn-ghost {
+  color: var(--white);
+  background: rgba(255, 255, 255, .035);
+  border-color: var(--edge);
 }
 
-.btn-secondary:hover{
-
-  border-color:var(--cyan);
-
-  color:var(--white);
+.btn-secondary:hover,
+.btn-ghost:hover {
+  border-color: var(--edge-strong);
+  color: var(--cyan-bright);
 }
 
 /* =====================================================
-   CTA BUTTON
-
-   The navigation call-to-action should stay on one line.
+   TEXT EFFECT COMPONENTS
 ===================================================== */
 
-.nav-cta{
+.eyebrow,
+.section-label,
+.panel-kicker,
+.card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  color: var(--cyan);
+  font-family: var(--ff-mono);
+  font-size: .76rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
 
-  white-space:nowrap;
+.eyebrow::before,
+.section-label::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--cyan);
+}
+
+.metallic-text {
+  color: transparent;
+  background: var(--gradient-metal);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* background-clip:text does NOT inherit to child spans — the chars
+   would be invisible. Each .char inside a metallic-text parent gets
+   its own gradient so the text actually renders. */
+.metallic-text .char {
+  color: transparent;
+  background: var(--gradient-metal);
+  background-size: 500% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.split-text {
+  display: block;
+  overflow: hidden;
+}
+
+.split-text .char {
+  display: inline-block;
+  transform: translateY(110%) rotate(4deg);
+  animation: charRise .72s var(--ease) forwards;
+  animation-delay: calc(var(--char-index) * 18ms + var(--line-index) * 90ms);
+}
+
+.rotating-line {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-top: 1.2rem;
+  color: var(--muted);
+  font-family: var(--ff-mono);
+  font-size: .9rem;
+}
+
+.rotating-line strong {
+  color: var(--cyan-bright);
+}
+
+.rotating-line strong.is-changing {
+  animation: flipWord .38s var(--ease);
 }
 
 /* =====================================================
-   SECTION LABEL
-
-   Small pill-shaped labels such as SERVICES and PROCESS.
+   HERO VISUAL / CIRCULAR TEXT
 ===================================================== */
 
-.section-label{
-
-  display:inline-block;
-
-  padding:
-    .5rem 1rem;
-
-  border:
-    1px solid var(--glass-border);
-
+.orbital-logo {
+  position: relative;
+  width: min(420px, 82vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
   background:
-    var(--glass);
-
-  backdrop-filter:
-    blur(10px);
-
-  border-radius:
-    999px;
-
-  color:
-    var(--cyan);
-
-  font-family:
-    var(--ff-mono);
-
-  letter-spacing:
-    .2em;
-
-  text-transform:
-    uppercase;
-
-  margin-bottom:
-    1.5rem;
-}
-/* =====================================================
-   ABOUT
-
-   Text styles for the company overview section.
-===================================================== */
-
-.about-content h2{
-
-  font-family:var(--ff-display);
-
-  font-size:clamp(3rem,6vw,5rem);
-
-  line-height:.95;
-
-  margin-bottom:2rem;
+    radial-gradient(circle, rgba(0, 212, 255, .16), transparent 58%),
+    linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border: 1px solid var(--edge);
+  box-shadow: var(--shadow-md), inset 0 0 44px rgba(0, 212, 255, .08);
+  overflow: visible;
 }
 
-.about-content p{
-
-  color:var(--muted);
-
-  max-width:700px;
-
-  margin-bottom:1.5rem;
-
-  line-height:1.8;
+.orbital-logo img {
+  width: 52%;
+  border-radius: 24px;
+  filter: drop-shadow(0 0 42px rgba(0, 212, 255, .32));
+  z-index: 2;
 }
 
-/* =====================================================
-   SECTION TITLES
+.circular-text {
+  position: absolute;
+  inset: 7%;
+  width: 86%;
+  height: 86%;
+  animation: spinCircle 18s linear infinite;
+}
 
-   Large headings reused across page sections.
-===================================================== */
+.circular-text text {
+  fill: var(--cyan-bright);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
 
-.section-title{
+.glass-panel {
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(18px);
+}
 
-  font-family:var(--ff-display);
+.hero-card {
+  position: relative;
+  width: min(280px, 90%);
+  padding: 1.25rem;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
 
-  font-size:clamp(3rem,6vw,5rem);
+.shuffle-number {
+  margin: .35rem 0;
+  font-family: var(--ff-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--white);
+}
 
-  margin-bottom:3rem;
+.hero-card p {
+  color: var(--muted);
+  font-size: .92rem;
 }
 
 /* =====================================================
-   SERVICES
-
-   The services grid holds six service cards.
-   Each card explains one business capability.
+   MARQUEE
 ===================================================== */
 
-.services-grid{
-
-  /* Three equal columns on desktop. */
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:1.5rem;
+.marquee-wrap {
+  overflow: hidden;
+  border-block: 1px solid var(--edge);
+  background: rgba(7, 11, 18, .72);
 }
 
-.service-card{
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
 
-  /* Relative positioning lets the card's top glow line sit inside the card. */
-  position:relative;
+.marquee-track span,
+.marquee-track b {
+  padding: .9rem 1.7rem;
+  color: var(--muted);
+  font-family: var(--ff-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  white-space: nowrap;
+}
 
+.marquee-track b {
+  color: var(--cyan);
+}
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.value-stack,
+.services-grid,
+.why-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.value-stack {
+  grid-template-columns: 1fr;
+}
+
+.services-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.why-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.value-card,
+.service-card,
+.why-card {
+  position: relative;
+  min-height: 210px;
+  padding: 1.5rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-md);
+  background: var(--gradient-panel);
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease), border-color var(--duration-normal), background var(--duration-normal);
+}
+
+.value-card::before,
+.service-card::before,
+.why-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(0, 212, 255, .2), transparent 42%);
+  transition: opacity var(--duration-normal);
+}
+
+.value-card:hover,
+.service-card:hover,
+.why-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--edge-strong);
+}
+
+.value-card:hover::before,
+.service-card:hover::before,
+.why-card:hover::before {
+  opacity: 1;
+}
+
+.value-card span,
+.service-number {
+  color: var(--cyan);
+  font-family: var(--ff-mono);
+  font-size: .78rem;
+}
+
+.value-card h3,
+.service-card h3,
+.why-card h3 {
+  position: relative;
+  margin: 1rem 0 .7rem;
+  font-size: 1.2rem;
+}
+
+.value-card p,
+.service-card p,
+.why-card p {
+  position: relative;
+  color: var(--muted);
+}
+
+.metallic-card {
   background:
-    var(--gradient-surface);
-
-  backdrop-filter:
-    blur(10px);
-
-  border:
-    1px solid var(--glass-border);
-
-  border-radius:
-    var(--radius-md);
-
-  padding:2rem;
-
-  overflow:hidden;
-
-  transition:var(--transition);
-}
-
-.service-card:hover{
-
-  transform:translateY(-6px);
-
-  border-color:var(--cyan);
-}
-
-.service-number{
-
-  color:var(--cyan);
-
-  font-family:var(--ff-mono);
-
-  display:block;
-
-  margin-bottom:1rem;
-}
-
-.service-card h3{
-
-  margin-bottom:1rem;
-}
-
-.service-card p{
-
-  color:var(--muted);
-
-  line-height:1.7;
-}
-
-.service-card::before{
-
-  /* Decorative top line that appears when the card is hovered. */
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-
-  width:100%;
-
-  height:2px;
-
-  background:
-    var(--gradient-primary);
-
-  opacity:0;
-
-  transition:var(--transition);
-}
-
-.service-card:hover::before{
-
-  opacity:1;
+    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.015)),
+    linear-gradient(115deg, rgba(124,236,255,.08), transparent 36%, rgba(247,216,137,.08));
 }
 
 /* =====================================================
-   PROCESS
-
-   The process timeline shows the order of work from
-   discovery to growth.
+   STEPPER
 ===================================================== */
 
-.process-timeline{
-
-  /* Lays process steps horizontally across the page. */
-  position:relative;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:2rem;
-
-  margin-top:3rem;
+.stepper {
+  display: grid;
+  gap: 1rem;
 }
 
-.process-step{
-
-  flex:1;
-
-  text-align:center;
+.stepper-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .55rem;
 }
 
-.step-dot{
-
-  /* Small cyan dot that marks each step in the process. */
-  width:18px;
-  height:18px;
-
-  border-radius:50%;
-
-  background:var(--cyan);
-
-  margin-inline:auto;
-
-  margin-bottom:1.5rem;
+.stepper-button {
+  min-height: 58px;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-family: var(--ff-mono);
+  cursor: pointer;
+  transition: background var(--duration-fast), color var(--duration-fast), border-color var(--duration-fast), transform var(--duration-fast);
 }
 
-.step-content h3{
-
-  margin-bottom:.75rem;
+.stepper-button:hover,
+.stepper-button.active {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  background: var(--cyan);
+  color: var(--black);
 }
 
-.step-content p{
+.stepper-panel {
+  padding: 2rem;
+  min-height: 250px;
+}
 
-  color:var(--muted);
+.stepper-panel h3 {
+  margin: .9rem 0;
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+}
 
-  line-height:1.7;
+.stepper-panel p {
+  color: var(--muted);
+  max-width: 620px;
 }
 
 /* =====================================================
-   WHY US
-
-   Cards that explain why someone should choose KLICKWIZE.
+   CONTACT
 ===================================================== */
 
-.why-grid{
-
-  /* Two-column card layout on desktop. */
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:1.5rem;
+.contact-section {
+  background: linear-gradient(180deg, transparent, rgba(0, 212, 255, .045));
 }
 
-.why-card{
-
-  background:var(--panel);
-
-  border:1px solid var(--edge);
-
-  padding:2rem;
-
-  transition:.3s;
+.contact-actions {
+  display: grid;
+  gap: .75rem;
+  margin-top: 2rem;
 }
 
-.why-card:hover{
-
-  border-color:var(--cyan);
-
-  transform:translateY(-4px);
+.contact-chip {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 44px;
+  align-items: center;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  padding: 0 1rem;
+  color: var(--white);
+  background: rgba(255,255,255,.035);
+  text-decoration: none;
+  transition: border-color var(--duration-fast), color var(--duration-fast), transform var(--duration-fast);
 }
 
-.why-card h3{
-
-  margin-bottom:1rem;
+.contact-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  color: var(--cyan-bright);
 }
 
-.why-card p{
-
-  color:var(--muted);
-
-  line-height:1.7;
+.contact-chip.whatsapp {
+  border-color: rgba(114, 230, 168, .42);
+  color: var(--green);
 }
 
-/* =====================================================
-   CTA
-
-   Final call-to-action section that encourages visitors
-   to start a project.
-===================================================== */
-
-.cta-content{
-
-  text-align:center;
-
-  max-width:800px;
-
-  margin-inline:auto;
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.3rem;
 }
 
-.cta-title{
-
-  font-family:var(--ff-display);
-
-  font-size:clamp(3rem,7vw,6rem);
-
-  line-height:.95;
-
-  margin-bottom:1.5rem;
+.contact-form label {
+  display: grid;
+  gap: .45rem;
+  color: var(--muted);
+  font-size: .9rem;
 }
 
-.cta-text{
-
-  color:var(--muted);
-
-  line-height:1.8;
-
-  margin-bottom:2rem;
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-sm);
+  background: rgba(3, 5, 10, .64);
+  color: var(--white);
+  padding: .85rem .9rem;
+  outline: 0;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.cta-button{
-
-  padding:1rem 2rem;
+.contact-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2397a8bc' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .9rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
 }
 
-.cta-button:hover{
-
-  transform:translateY(-3px);
-}
-/* =====================================================
-   FOOTER
-
-   Bottom area with brand name, quick links, and tagline.
-===================================================== */
-
-footer{
-
-  padding-bottom:4rem;
-
-  text-align:center;
+.contact-form select option {
+  background: #0d1420;
+  color: var(--white);
 }
 
-.footer-logo{
-
-  font-family:var(--ff-display);
-
-  font-size:2rem;
-
-  margin-bottom:1rem;
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
-.footer-links{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:2rem;
-
-  margin-bottom:1.5rem;
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, .08);
 }
 
-.footer-links a{
-
-  color:var(--muted);
-
-  text-decoration:none;
+.form-status {
+  min-height: 1.4rem;
+  color: var(--green);
+  font-size: .9rem;
 }
 
-.footer-copy{
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
-  color:var(--muted);
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--cyan);
 }

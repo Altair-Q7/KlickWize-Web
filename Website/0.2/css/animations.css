@@ -1,7 +1,108 @@
 /* =====================================================
    ANIMATIONS
 
-   This file is intentionally empty for now.
-   Add future movement effects here, such as text reveals,
-   hover animations, or scroll-based effects.
+   These effects add polish. They are written in one file
+   so the site can be made calmer later if needed.
 ===================================================== */
+
+.reveal,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+
+.reveal {
+  transform: translateY(30px);
+}
+
+.reveal-left {
+  transform: translateX(-34px);
+}
+
+.reveal-right {
+  transform: translateX(34px);
+}
+
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+.metallic-text {
+  animation: metalSweep 7s ease-in-out infinite alternate;
+}
+
+.orbital-logo::before,
+.orbital-logo::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(0, 212, 255, .18);
+  border-radius: 50%;
+}
+
+.orbital-logo::before {
+  inset: 12%;
+  animation: orbitPulse 3.5s ease-in-out infinite;
+}
+
+.orbital-logo::after {
+  inset: -8%;
+  border-style: dashed;
+  animation: spinCircle 28s linear infinite reverse;
+}
+
+.magnetic:hover {
+  animation: buttonSpark .7s var(--ease);
+}
+
+@keyframes charRise {
+  to {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes flipWord {
+  0% { transform: translateY(0); opacity: 1; }
+  45% { transform: translateY(-10px); opacity: 0; }
+  55% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes metalSweep {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@keyframes spinCircle {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitPulse {
+  0%, 100% { opacity: .35; transform: scale(.96); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+@keyframes buttonSpark {
+  0% { filter: brightness(1); }
+  45% { filter: brightness(1.25); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

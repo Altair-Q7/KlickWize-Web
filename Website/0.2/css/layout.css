@@ -1,217 +1,212 @@
 /* =====================================================
-   GLOBAL RESET
+   GLOBAL LAYOUT
 
-   This section removes browser defaults so the website
-   looks consistent in Chrome, Firefox, Safari, and Edge.
+   This file controls the big page structure:
+   body, sections, containers, hero, split layouts, and footer.
 ===================================================== */
 
 *,
 *::before,
-*::after{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html{
-  /* Makes menu clicks glide smoothly to each section. */
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-
-  /* Main page background: a dark base with a soft cyan glow at the top. */
+body {
+  min-height: 100vh;
   background:
-    radial-gradient(
-      circle at top center,
-      rgba(0,212,255,.08),
-      transparent 40%
-    ),
-    var(--black);
-
-  color:var(--white);
-
-  /* Normal text uses the body font from variables.css. */
-  font-family:var(--ff-body);
-
-  /* Prevents accidental sideways scrolling. */
-  overflow-x:hidden;
-
-  /* Gives paragraphs comfortable breathing room between lines. */
-  line-height:1.6;
+    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .12), transparent 34rem),
+    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .1), transparent 30rem),
+    linear-gradient(180deg, #04070d 0%, var(--black) 45%, #05080e 100%);
+  color: var(--white);
+  font-family: var(--ff-body);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* =====================================================
-   SECTION SPACING
-
-   Sections are the big horizontal blocks of the page:
-   hero, about, services, process, why us, and CTA.
-===================================================== */
-
-section{
-  padding:var(--space-2xl) var(--space-md);
-}
-.section{
-
-  /* Allows decorative items inside sections to be positioned safely. */
-  position:relative;
-}
-/* =====================================================
-   CONTAINER
-
-   A container keeps content centered and stops it from
-   stretching too wide on large screens.
-===================================================== */
-
-.container{
-  width:min(100%, var(--container));
-  margin-inline:auto;
-}
-
-/* =====================================================
-   HERO LAYOUT
-
-   The hero is the first screen people see. It uses two
-   columns: text on the left, logo/brand image on the right.
-===================================================== */
-
-#hero{
-  /* Takes at least the full height of the screen. */
-  min-height:100vh;
-
-  /* Grid makes the two-column layout. */
-  display:grid;
-
-  /* Left side is wider than the right side. */
-  grid-template-columns:
-    1.3fr
-    0.7fr;
-
-  /* Vertically centers the hero content. */
-  align-items:center;
-
-  gap:4rem;
-}
-
-.hero-content h1{
-
-  /* Large headline size controlled by variables.css. */
-  font-size:var(--fs-hero);
-
-  /* Tight line height makes SECURE / BUILD / GROW feel like one strong block. */
-  line-height:.85;
-
-  /* Pulls the letters slightly closer together for a bold brand look. */
-  letter-spacing:-.03em;
-
-  margin-bottom:1rem;
-}
-
-.hero-content p{
-  margin-top:1rem;
-
-  /* Muted color makes this text secondary to the main headline. */
-  color:var(--muted);
-
-  max-width:500px;
-}
-
-.hero-actions{
-  /* Places the two hero buttons side by side, then wraps on small screens. */
-  display:flex;
-  flex-wrap:wrap;
-  gap:1rem;
-  margin-top:2rem;
-}
-
-/* =====================================================
-   NAVIGATION
-
-   The header stays fixed at the top so navigation is
-   always available while scrolling.
-===================================================== */
-
-header{
-
-  /* Fixed means it stays visible even while the page scrolls. */
-  position:fixed;
-
-  top:0;
-  left:0;
-
-  width:100%;
-
-  /* Keeps the navigation above the rest of the page. */
-  z-index:1000;
-}
-
-.navbar{
-
-  /* Places logo, links, and CTA button in one horizontal row. */
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  min-height:80px;
-}
-
-.nav-links{
-
-  /* Keeps navigation links side by side. */
-  display:flex;
-
-  gap:2rem;
-
-  list-style:none;
-}
-
-/* Centers the logo image inside the hero brand card. */
-.hero-brand{
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-}
-
-/* Keeps the logo responsive so it never overflows its card. */
-.hero-brand img{
-
-  width:min(100%,450px);
-
-  height:auto;
-}
-
-/* Adds the subtle background grid behind the page content. */
-body::before{
-
-  content:"";
-
-  position:fixed;
-
-  inset:0;
-
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
   background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
 
-    linear-gradient(
-      var(--grid-line) 1px,
-      transparent 1px
-    ),
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
 
-    linear-gradient(
-      90deg,
-      var(--grid-line) 1px,
-      transparent 1px
-    );
+a {
+  color: inherit;
+}
 
-  background-size:
-    50px 50px;
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
 
-  pointer-events:none;
+.container {
+  width: min(var(--container), calc(100% - 40px));
+  margin-inline: auto;
+}
 
-  /* Places the grid behind everything else. */
-  z-index:-1;
+.section {
+  position: relative;
+  padding: var(--space-2xl) 0;
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.spark-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: .62;
+  pointer-events: none;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid transparent;
+  transition: background var(--duration-normal) var(--ease), border-color var(--duration-normal) var(--ease), transform var(--duration-normal) var(--ease);
+}
+
+.site-header.scrolled {
+  background: rgba(3, 5, 10, .78);
+  border-color: var(--edge);
+  backdrop-filter: blur(18px);
+}
+
+.navbar {
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding-top: calc(var(--header-height) + 3rem);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .75fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.hero-copy {
+  max-width: 760px;
+}
+
+.hero-title {
+  margin: 1.2rem 0;
+  font-family: var(--ff-display);
+  font-size: clamp(4.6rem, 11vw, 10.2rem);
+  line-height: .82;
+  text-transform: uppercase;
+  letter-spacing: -.04em;
+}
+
+.hero-description {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  margin-top: 2rem;
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 540px;
+  justify-content: center;
+}
+
+.split-section,
+.process-layout,
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.section-copy p:not(.section-label),
+.contact-copy p {
+  color: var(--muted);
+  max-width: 680px;
+  margin-top: 1rem;
+}
+
+.section-heading {
+  max-width: 850px;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  margin-top: .85rem;
+  font-family: var(--ff-display);
+  font-size: clamp(2.6rem, 6vw, 5.8rem);
+  line-height: .92;
+  letter-spacing: -.035em;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+  border-top: 1px solid var(--edge);
+  padding: 2rem 0;
+  background: rgba(3, 5, 10, .72);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: .92rem;
 }

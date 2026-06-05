@@ -1,215 +1,71 @@
 /* =====================================================
-   KLICKWIZE 0.2 - DESIGN SYSTEM VARIABLES
+   DESIGN SYSTEM VARIABLES
 
-   This file is the website's control panel.
-   Change colors, fonts, spacing, shadows, and animation
-   timing here so the rest of the CSS can reuse the same
-   values instead of repeating them everywhere.
+   Think of this file as the control panel for the site.
+   If you want a different color, spacing, or font later,
+   change it here first.
 ===================================================== */
 
 :root {
-
-  /* ==================================================
-     BASE COLORS
-
-     These are the main paint colors for the website.
-     Dark colors create the cyber/tech background.
-     Bright cyan is the main highlight color.
-  ================================================== */
-
-  /* Almost black: the main page background. */
+  /* Main page colors */
   --black: #03050a;
+  --deep: #070b12;
+  --surface: #0d1420;
+  --panel: rgba(13, 20, 32, .78);
+  --panel-strong: #111a29;
 
-  /* Very dark blue: used when the page needs a soft dark layer. */
-  --deep: #080c14;
-
-  /* Dark surface: used for larger content areas. */
-  --surface: #0d1220;
-
-  /* Panel color: used for cards and boxes. */
-  --panel: #121926;
-
-  /* Edge color: the thin border around boxes and buttons. */
-  --edge: #1a2535;
-
-  /* Bright cyan: the brand accent, like a neon highlight. */
+  /* Brand accents */
   --cyan: #00d4ff;
+  --cyan-bright: #7cecff;
+  --cyan-soft: rgba(0, 212, 255, .12);
+  --blue: #4776ff;
+  --green: #72e6a8;
+  --gold: #f7d889;
 
-  /* Dim cyan: a calmer version of the brand accent. */
-  --cyan-dim: #0099bb;
+  /* Text colors */
+  --white: #edf7fb;
+  --muted: #97a8bc;
+  --dim: #627184;
 
-  /* Soft white: readable text without being harsh. */
-  --white: #e8eef8;
+  /* Lines and glass */
+  --edge: rgba(129, 232, 255, .18);
+  --edge-strong: rgba(129, 232, 255, .42);
+  --glass: rgba(255, 255, 255, .045);
+  --glass-border: rgba(255, 255, 255, .1);
 
-  /* Muted blue-gray: secondary text that should feel quieter. */
-  --muted: #6a788d;
+  /* Fonts */
+  --ff-display: "Oxanium", system-ui, sans-serif;
+  --ff-body: "Inter", system-ui, sans-serif;
+  --ff-mono: "JetBrains Mono", monospace;
 
-  /* ==================================================
-     GLOWS
-
-     Glow colors create the soft neon light effect.
-     The lower the number after the comma, the softer the glow.
-  ================================================== */
-
-  --cyan-glow: rgba(0,212,255,.15);
-  --cyan-soft: rgba(0,212,255,.08);
-
-  /* ==================================================
-     TYPOGRAPHY
-
-     These are the font families used across the page.
-     Display = big titles, Body = normal reading text,
-     Mono = technical labels and small navigation text.
-  ================================================== */
-
-  --ff-display: 'Oxanium', sans-serif;
-  --ff-body: 'Inter', sans-serif;
-  --ff-mono: 'JetBrains Mono', monospace;
-
-  /* ==================================================
-     SPACING
-
-     These control empty space between elements.
-     xs is small spacing; 2xl is very large spacing.
-  ================================================== */
-
-  --space-xs: .5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 4rem;
-  --space-xl: 6rem;
-  --space-2xl: 8rem;
-
-  /* ==================================================
-     CONTAINERS
-
-     Containers stop the content from becoming too wide
-     on large screens, keeping it readable.
-  ================================================== */
-
-  --container: 1280px;
-  --container-small: 900px;
-
-  /* ==================================================
-     BORDERS
-
-     Radius means roundness. A larger radius makes boxes
-     and cards look more rounded.
-  ================================================== */
-
-  --radius-sm: 8px;
+  /* Sizing */
+  --container: 1180px;
+  --header-height: 82px;
+  --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
 
-  /* ==================================================
-     ANIMATIONS
+  /* Spacing */
+  --space-xs: .5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+  --space-2xl: 7rem;
 
-     These values control how quickly hover and movement
-     effects happen.
-  ================================================== */
-
-  --ease:
-    cubic-bezier(.16,1,.3,1);
-
-  --duration-fast: .25s;
+  /* Motion */
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --duration-fast: .2s;
   --duration-normal: .45s;
   --duration-slow: .8s;
 
-  /* ==================================================
-     PRIMARY BRAND COLORS
+  /* Shadows and glows */
+  --shadow-sm: 0 12px 30px rgba(0, 0, 0, .28);
+  --shadow-md: 0 22px 60px rgba(0, 0, 0, .42);
+  --glow-cyan: 0 0 42px rgba(0, 212, 255, .24);
 
-     Extra accent colors for gradients and highlights.
-  ================================================== */
-
-  --cyan-bright: #5ae6ff;
-  --cyan-dark: #0099bb;
-
-  --blue: #3b82f6;
-  --blue-dark: #1d4ed8;
-
-  /* ==================================================
-     ATMOSPHERE
-
-     These add glass, grid, and futuristic background detail.
-  ================================================== */
-
-  --grid-line: rgba(255,255,255,.03);
-
-  --glass: rgba(255,255,255,.03);
-
-  --glass-border: rgba(255,255,255,.08);
-
-  /* ==================================================
-     GLOW SYSTEM
-
-     Reusable shadow glows. Small is subtle, large is bold.
-  ================================================== */
-
-  --glow-sm: 0 0 20px rgba(0,212,255,.15);
-
-  --glow-md: 0 0 40px rgba(0,212,255,.20);
-
-  --glow-lg: 0 0 80px rgba(0,212,255,.30);
-
-  /* ==================================================
-     TYPE SCALE
-
-     Reusable font sizes. The hero size uses clamp(),
-     which means it grows or shrinks depending on screen size.
-  ================================================== */
-
-  --fs-xs: .875rem;
-  --fs-sm: 1rem;
-  --fs-md: 1.125rem;
-  --fs-lg: 1.5rem;
-  --fs-xl: 2rem;
-
-  --fs-hero: clamp(5rem,12vw,12rem);
-
-  /* ==================================================
-     SHADOWS
-
-     Shadows make cards and buttons look lifted from the page.
-  ================================================== */
-
-  --shadow-sm:
-  0 10px 30px rgba(0,0,0,.25);
-
-  --shadow-md:
-  0 20px 50px rgba(0,0,0,.40);
-
-  --shadow-lg:
-  0 30px 80px rgba(0,0,0,.55);
-
-
-  /* ==================================================
-     GRADIENTS
-
-     Gradients blend colors together instead of using one flat color.
-  ================================================== */
-
-  --gradient-primary:
-  linear-gradient(
-    135deg,
-    var(--cyan),
-    var(--blue)
-  );
-
-  --gradient-surface:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,.03),
-    rgba(255,255,255,.01)
-  );
-
-
-  /* ==================================================
-     TRANSITIONS
-
-     The default motion rule reused by buttons, cards, and links.
-  ================================================== */
-
-  --transition:
-  all var(--duration-normal)
-  var(--ease);
+  /* Reusable gradients */
+  --gradient-primary: linear-gradient(135deg, var(--cyan), var(--blue));
+  --gradient-metal: linear-gradient(115deg, #6d7a86 0%, #f8fbff 18%, #7cecff 36%, #41566a 55%, #ffffff 74%, #80e8ff 100%);
+  --gradient-panel: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
 }

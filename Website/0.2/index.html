@@ -1,486 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- ==================================================
-     DOCUMENT HEAD
-
-     The head does not show visible page content.
-     It tells the browser which fonts, styles, title,
-     and screen settings the website needs.
-================================================== -->
-
 <head>
+    <!-- ==================================================
+         BASIC PAGE SETTINGS
 
-    <!-- Character encoding: tells the browser how to read text characters. -->
+         These tags help browsers, phones, and search engines
+         understand the website correctly.
+    ================================================== -->
     <meta charset="UTF-8">
-
-    <!-- Responsive viewport: makes the website scale correctly on phones. -->
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <!-- Browser title: this appears in the browser tab. -->
-    <title>KLICKWIZE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KLICKWIZE delivers cybersecurity, digital transformation, software, AI automation, cloud, DevOps, and growth solutions with security built in from day one.">
+    <title>KLICKWIZE | Click Wisely. Stay Secure.</title>
 
     <!-- ==================================================
-         GOOGLE FONTS
+         FONTS
 
-         These links load the typefaces used by the website.
+         Inter is used for readable text.
+         Oxanium gives headings a precise technology feel.
+         JetBrains Mono is used for labels and small technical text.
     ================================================== -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&family=Oxanium:wght@500;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Oxanium:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- ==================================================
-         STYLESHEETS
+         CSS FILES
 
-         CSS files are loaded in order:
-         variables first, then layout, components, animations, responsive fixes.
+         Keep this order:
+         variables -> layout -> components -> animations -> responsive.
     ================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="css/variables.css">
-
-    <link
-        rel="stylesheet"
-        href="css/layout.css">
-
-    <link
-        rel="stylesheet"
-        href="css/components.css">
-
-    <link
-        rel="stylesheet"
-        href="css/animations.css">
-
-    <link
-        rel="stylesheet"
-        href="css/responsive.css">
-
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
+    <!-- ==================================================
+         SPARK LAYER
+
+         This canvas sits behind the page and creates the
+         subtle moving cyber network effect.
+    ================================================== -->
+    <canvas id="spark-canvas" class="spark-canvas" aria-hidden="true"></canvas>
 
     <!-- ==================================================
-         SITE HEADER
+         HEADER / PILL NAV
 
-         The top navigation bar. It helps visitors jump
-         to the main page sections without scrolling manually.
+         The header stays fixed at the top.
+         The pill nav makes the site feel modern and app-like.
     ================================================== -->
-
-    <header>
-
-        <nav class="navbar container">
-
-             <!-- Brand identity: clickable company name that returns to the top. -->
-
-            <a
-                href="#hero"
-                class="logo">
-
-                KLICKWIZE
-
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+            <a href="#hero" class="brand-mark" aria-label="KLICKWIZE home">
+                <img src="assets/images/Logo.png" alt="KLICKWIZE shield logo">
+                <span>
+                    <strong><span class="brand-klick">KLICK</span><span class="brand-wize">WIZE</span></strong>
+                    <small>Click wisely. Stay secure.</small>
+                </span>
             </a>
 
-             <!-- Primary navigation: the main links visitors use to move around. -->
-
-            <ul class="nav-links">
-
+            <ul class="pill-nav" data-pill-nav>
+                <li><a class="active" href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
-
                 <li><a href="#services">Services</a></li>
-
                 <li><a href="#process">Process</a></li>
-
-                <li><a href="#why">Why Us</a></li>
-
+                <li><a href="#contact">Contact</a></li>
             </ul>
 
-             <!-- Primary CTA: CTA means call-to-action, the main button to guide users. -->
-
-            <a
-                href="#cta"
-                class="btn btn-primary nav-cta">
-
-                Let's Talk
-
-            </a>
-
+            <div class="nav-actions">
+                <a class="btn btn-ghost nav-doc" href="assets/docs/Documentation.pdf" target="_blank" rel="noreferrer">Docs</a>
+                <a class="btn btn-primary nav-cta" href="#contact">Let's Talk</a>
+                <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
 
+        <!-- Mobile menu: JS opens this when the menu button is tapped. -->
+        <div class="staggered-menu" data-mobile-menu aria-hidden="true">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#why">Why Us</a>
+            <a href="#contact">Contact</a>
+        </div>
     </header>
 
-    <!-- ==================================================
-         HERO SECTION
+    <main>
+        <!-- ==================================================
+             HERO
 
-         The first visible area of the website.
-         It gives visitors the main message immediately.
-    ================================================== -->
+             First impression. It explains what KLICKWIZE does
+             and uses the logo as a meaningful brand object.
+        ================================================== -->
+        <section id="hero" class="hero section">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow decrypt-text" data-text="SECURITY-FIRST DIGITAL TRANSFORMATION">
+                        SECURITY-FIRST DIGITAL TRANSFORMATION
+                    </p>
 
-    <section
-        id="hero"
-        class="section container">
+                    <h1 class="hero-title metallic-text" aria-label="Secure Build Grow">
+                        <span class="split-text">Secure</span>
+                        <span class="split-text">Build</span>
+                        <span class="split-text">Grow</span>
+                    </h1>
 
-         <!-- Hero content: the headline, short message, and action buttons. -->
+                    <p class="hero-description">
+                        KLICKWIZE combines cybersecurity expertise with modern technology services to deliver secure, end-to-end digital solutions across the complete business lifecycle.
+                    </p>
 
-        <div class="hero-content">
+                    <div class="rotating-line" aria-live="polite">
+                        <span>Focused on</span>
+                        <strong data-rotating-text data-words="Cybersecurity,Digital Transformation,Business Growth,AI Automation,Cloud Resilience">Cybersecurity</strong>
+                    </div>
 
-            <span class="hero-tag">
+                    <div class="hero-actions">
+                        <a class="btn btn-primary magnetic" href="#contact">Start a Project</a>
+                        <a class="btn btn-secondary" href="#services">Explore Services</a>
+                    </div>
+                </div>
 
-                CYBERSECURITY • DEVELOPMENT • AI
-
-            </span>
-
-            <h1 class="hero-title">
-
-                <span class="hero-line">
-                    SECURE
-                </span>
-
-                <span class="hero-line">
-                    BUILD
-                </span>
-
-                <span class="hero-line">
-                    GROW
-                </span>
-
-            </h1>
-
-            <p class="hero-description">
-
-                Protect. Build. Scale.
-
-            </p>
-
-            <div class="hero-actions">
-
-                <a
-                    href="#cta"
-                    class="btn btn-primary">
-
-                    Start Project
-
-                </a>
-
-                <a
-                    href="#services"
-                    class="btn btn-secondary">
-
-                    Explore Services
-
-                </a>
-
-            </div>
-
-        </div>
-
-         <!-- Hero branding: displays the company logo beside the headline. -->
-
-        <div class="hero-brand">
-
-            <img
-                src="assets/images/Logo.png"
-                alt="KLICKWIZE Logo">
-
-        </div>
-
-    </section>
-
-    <!-- ==================================================
-         ABOUT SECTION
-
-         Explains what KLICKWIZE does and the main belief:
-         security should be planned from the beginning.
-    ================================================== -->
-
-    <section
-        id="about"
-        class="section container">
-
-        <div class="about-content">
-
-            <span class="section-label">
-                ABOUT KLICKWIZE
-            </span>
-
-            <h2 class="section-title">
-
-                Secure By Design.
-                Built For Growth.
-
-            </h2>
-
-            <p>
-                KLICKWIZE combines cybersecurity,
-                software development,
-                cloud technologies,
-                and digital innovation.
-            </p>
-
-            <p>
-                Security should never be an
-                afterthought.
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- ==================================================
-         SERVICES SECTION
-
-         Shows the main services as cards so visitors can
-         quickly understand what the company offers.
-    ================================================== -->
-
-    <section
-        id="services"
-        class="section container">
-
-        <!-- Services header: small label plus large section title. -->
-        <span class="section-label"> SERVICES </span>
-        <h2 class="section-title"> What We Do </h2>
-
-        <!-- Services grid: card layout that groups all service offerings. -->
-        <div class="services-grid">
-
-            <!-- Service Card 01: Cybersecurity -->
-            <article class="service-card">
-                <span class="service-number">01</span>
-                <h3>Cybersecurity</h3>
-                <p> Protect businesses from evolving digital threats. </p>
-            </article>
-
-            <!-- Service Card 02: Web Development -->
-            <article class="service-card">
-                <span class="service-number">02</span>
-                <h3>Web Development</h3>
-                <p> Modern websites and web applications. </p>
-            </article>
-
-            <!-- Service Card 03: Mobile Development -->
-            <article class="service-card">
-                <span class="service-number">03</span>
-                <h3>Mobile Development</h3>
-                <p> Fast and scalable mobile experiences. </p>
-            </article>
-
-            <!-- Service Card 04: AI & Automation -->
-            <article class="service-card">
-                <span class="service-number">04</span>
-                <h3>AI & Automation</h3>
-                <p> Smarter workflows with intelligent systems. </p>
-            </article>
-
-            <!-- Service Card 05: Cloud & DevOps -->
-            <article class="service-card">
-                <span class="service-number">05</span>
-                <h3>Cloud & DevOps</h3>
-                <p> Reliable infrastructure and deployment pipelines. </p>
-            </article>
-
-            <!-- Service Card 06: Digital Growth -->
-            <article class="service-card">
-                <span class="service-number">06</span>
-                <h3>Digital Growth</h3>
-                <p> Strategies designed for measurable results. </p>
-            </article>
-
-        </div>
-
-    </section>
-
-    <!-- ==================================================
-         PROCESS SECTION
-
-         Explains the step-by-step working process in order.
-    ================================================== -->
-
-    <section
-        id="process"
-        class="section container">
-
-        <!-- Process header: introduces how the company works. -->
-        <span class="section-label"> PROCESS </span>
-        <h2 class="section-title"> How We Work </h2>
-
-        <!-- Process timeline: each step shows one stage of the project journey. -->
-        <div class="process-timeline">
-
-            <!-- Process Step 1: Discovery -->
-            <div class="process-step">
-                <div class="step-dot"></div>
-                <div class="step-content">
-                    <h3>Discovery</h3>
-                    <p> Understanding goals, systems, and challenges. </p>
+                <div class="hero-visual" aria-label="KLICKWIZE brand visual">
+                    <div class="orbital-logo">
+                        <img src="assets/images/Logo.png" alt="KLICKWIZE shield logo">
+                        <svg class="circular-text" viewBox="0 0 220 220" aria-hidden="true">
+                            <defs>
+                                <path id="circleTextPath" d="M110,110 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"></path>
+                            </defs>
+                            <text>
+                                <textPath href="#circleTextPath">
+                                    CLICK WISELY - STAY SECURE - KLICKWIZE -
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                    <div class="hero-card glass-panel">
+                        <span class="card-label">Documented Focus</span>
+                        <div class="shuffle-number" data-shuffle-number data-final="6">0</div>
+                        <p>Integrated service pillars with security embedded at every layer.</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Process Step 2: Architecture -->
-            <div class="process-step">
-                <div class="step-dot"></div>
-                <div class="step-content">
-                    <h3>Architecture</h3>
-                    <p> Building secure and scalable foundations. </p>
-                </div>
+        <!-- ==================================================
+             MARQUEE / SERVICE STRIP
+
+             Quick moving list of the six company service pillars.
+        ================================================== -->
+        <div class="marquee-wrap" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Cybersecurity</span><b>+</b>
+                <span>Web Development</span><b>+</b>
+                <span>Mobile Apps</span><b>+</b>
+                <span>AI Automation</span><b>+</b>
+                <span>Cloud & DevOps</span><b>+</b>
+                <span>Digital Growth</span><b>+</b>
+                <span>Cybersecurity</span><b>+</b>
+                <span>Web Development</span><b>+</b>
+                <span>Mobile Apps</span><b>+</b>
+                <span>AI Automation</span><b>+</b>
+                <span>Cloud & DevOps</span><b>+</b>
+                <span>Digital Growth</span><b>+</b>
             </div>
-
-            <!-- Process Step 3: Development -->
-            <div class="process-step">
-                <div class="step-dot"></div>
-                <div class="step-content">
-                    <h3>Development</h3>
-                    <p> Turning ideas into production-ready solutions. </p>
-                </div>
-            </div>
-
-            <!-- Process Step 4: Deployment -->
-            <div class="process-step">
-                <div class="step-dot"></div>
-                <div class="step-content">
-                    <h3>Deployment</h3>
-                    <p> Launching with performance and security. </p>
-                </div>
-            </div>
-
-            <!-- Process Step 5: Growth -->
-            <div class="process-step">
-                <div class="step-dot"></div>
-                <div class="step-content">
-                    <h3>Growth</h3>
-                    <p> Continuous improvement and optimization. </p>
-                </div>
-            </div>
-
         </div>
 
-    </section>
+        <!-- ==================================================
+             ABOUT
+
+             Honest company overview based on the proposal PDF.
+        ================================================== -->
+        <section id="about" class="section">
+            <div class="container split-section">
+                <div class="section-copy reveal-left">
+                    <p class="section-label decrypt-text" data-text="ABOUT KLICKWIZE">ABOUT KLICKWIZE</p>
+                    <h2 class="section-title">Security is not an afterthought.</h2>
+                    <p>
+                        KLICKWIZE is a technology-driven company specializing in Cybersecurity, Digital Transformation, and Business Growth Solutions.
+                    </p>
+                    <p>
+                        The company combines advanced cybersecurity expertise with modern technology services: protecting critical infrastructure, building customer-facing applications, and automating business workflows.
+                    </p>
+                </div>
+
+                <div class="value-stack reveal-right">
+                    <article class="value-card metallic-card">
+                        <span>01</span>
+                        <h3>Security</h3>
+                        <p>Protecting what matters most, always.</p>
+                    </article>
+                    <article class="value-card metallic-card">
+                        <span>02</span>
+                        <h3>Innovation</h3>
+                        <p>Harnessing technology to solve real problems.</p>
+                    </article>
+                    <article class="value-card metallic-card">
+                        <span>03</span>
+                        <h3>Growth</h3>
+                        <p>Turning digital investment into measurable results.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             SERVICES
+
+             Each card describes one documented service pillar.
+        ================================================== -->
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <p class="section-label">SERVICES</p>
+                    <h2 class="section-title">Six pillars. One security-first partner.</h2>
+                </div>
+
+                <div class="services-grid reveal">
+                    <article class="service-card">
+                        <span class="service-number">01</span>
+                        <h3>Cybersecurity Solutions</h3>
+                        <p>Threat mitigation and protection for digital systems, infrastructure, and business operations.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">02</span>
+                        <h3>Web Development</h3>
+                        <p>Modern websites and custom web applications for customer-facing and operational needs.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">03</span>
+                        <h3>Mobile App Development</h3>
+                        <p>High-performance mobile experiences for connected services, users, and teams.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">04</span>
+                        <h3>AI & Workflow Automation</h3>
+                        <p>Automation and AI-assisted workflows that reduce manual effort and improve execution.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">05</span>
+                        <h3>IT, Cloud & DevOps</h3>
+                        <p>Infrastructure, cloud solutions, deployment practices, monitoring, and continuity planning.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">06</span>
+                        <h3>Digital Growth Funnels</h3>
+                        <p>Marketing and growth systems focused on leads, conversions, efficiency, and revenue.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             PROCESS STEPPER
+
+             Visitors can click steps. JS highlights the active
+             step and updates the explanation panel.
+        ================================================== -->
+        <section id="process" class="section">
+            <div class="container process-layout">
+                <div class="section-copy reveal-left">
+                    <p class="section-label">PROCESS</p>
+                    <h2 class="section-title">Built for value, resilience, and advantage.</h2>
+                    <p>
+                        The process follows the operational mission from the documentation: create lasting value, build operational resilience, and secure competitive advantage.
+                    </p>
+                </div>
+
+                <div class="stepper reveal-right" data-stepper>
+                    <div class="stepper-buttons" role="tablist" aria-label="Project process steps">
+                        <button class="stepper-button active" type="button" role="tab" aria-selected="true" data-step-title="Discover" data-step-copy="Understand the goals, existing systems, risks, workflows, and business outcomes before choosing the solution.">01</button>
+                        <button class="stepper-button" type="button" role="tab" aria-selected="false" data-step-title="Architect" data-step-copy="Design security-first foundations so protection is part of the plan, not something added at the end.">02</button>
+                        <button class="stepper-button" type="button" role="tab" aria-selected="false" data-step-title="Build" data-step-copy="Create modular digital applications, automations, infrastructure, or growth systems with sustainable engineering patterns.">03</button>
+                        <button class="stepper-button" type="button" role="tab" aria-selected="false" data-step-title="Harden" data-step-copy="Support resilience with monitoring, fail-safes, and continuity thinking where the project requires it.">04</button>
+                        <button class="stepper-button" type="button" role="tab" aria-selected="false" data-step-title="Grow" data-step-copy="Use AI, automation, and metrics-driven growth strategies to keep improving the outcome after launch.">05</button>
+                    </div>
+
+                    <div class="stepper-panel glass-panel" data-step-panel>
+                        <span class="panel-kicker">Current step</span>
+                        <h3 data-step-title-output>Discover</h3>
+                        <p data-step-copy-output>Understand the goals, existing systems, risks, workflows, and business outcomes before choosing the solution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             WHY US
+
+             Clear reasons from the proposal, written as value
+             cards rather than exaggerated promises.
+        ================================================== -->
+        <section id="why" class="section">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <p class="section-label">WHY KLICKWIZE</p>
+                    <h2 class="section-title">The rare part is the connection.</h2>
+                </div>
+
+                <div class="why-grid reveal">
+                    <article class="why-card">
+                        <h3>Security-First Approach</h3>
+                        <p>Cybersecurity is woven into the foundation of each solution.</p>
+                    </article>
+
+                    <article class="why-card">
+                        <h3>End-to-End Solutions</h3>
+                        <p>Strategy, development, deployment, and management stay connected.</p>
+                    </article>
+
+                    <article class="why-card">
+                        <h3>Innovation-Driven Services</h3>
+                        <p>AI, automation, and cloud are used where they create real value.</p>
+                    </article>
+
+                    <article class="why-card">
+                        <h3>Scalable & Future-Ready</h3>
+                        <p>Solutions are designed for today and architected for tomorrow.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             CONTACT
+
+             Backend-ready form plus direct WhatsApp option.
+             Instagram is intentionally left commented until ready.
+        ================================================== -->
+        <section id="contact" class="section contact-section">
+            <div class="container contact-grid">
+                <div class="contact-copy reveal-left">
+                    <p class="section-label">CONTACT</p>
+                    <h2 class="section-title">Start the right conversation.</h2>
+                    <p>
+                        Use the form for a structured project brief, or start directly on WhatsApp for a faster first touch.
+                    </p>
+
+                    <div class="contact-actions">
+                        <a class="contact-chip whatsapp" href="https://wa.me/917025703968" target="_blank" rel="noreferrer">
+                            WhatsApp: +91 70257 03968
+                        </a>
+
+                        <a class="contact-chip" href="assets/docs/Documentation.pdf" target="_blank" rel="noreferrer">
+                            Read Company Documentation
+                        </a>
+
+                        <!-- Instagram is intentionally commented until the profile link is ready.
+                        <a class="contact-chip" href="https://instagram.com/klickwize" target="_blank" rel="noreferrer">
+                            Instagram: @klickwize
+                        </a>
+                        -->
+                    </div>
+                </div>
+
+                <form class="contact-form glass-panel reveal-right" data-contact-form>
+                    <!-- Backend note:
+                         Later, connect this form by replacing the placeholder
+                         in js/app.js with your API endpoint, for example:
+                         fetch('/api/contact', { method:'POST', body: JSON.stringify(payload) })
+                    -->
+                    <label>
+                        <span>Name</span>
+                        <input name="name" type="text" autocomplete="name" required>
+                    </label>
+
+                    <label>
+                        <span>Work Email</span>
+                        <input name="email" type="email" autocomplete="email" required>
+                    </label>
+
+                    <label>
+                        <span>Service Needed</span>
+                        <select name="service" required>
+                            <option value="">Choose a service</option>
+                            <option>Cybersecurity Solutions</option>
+                            <option>Web Development</option>
+                            <option>Mobile App Development</option>
+                            <option>AI & Workflow Automation</option>
+                            <option>IT, Cloud & DevOps</option>
+                            <option>Digital Growth Funnels</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <span>Project Context</span>
+                        <textarea name="message" rows="5" required></textarea>
+                    </label>
+
+                    <button class="btn btn-primary" type="submit">Send Message</button>
+                    <p class="form-status" data-form-status aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
 
     <!-- ==================================================
-         WHY US SECTION
+         FOOTER
 
-         Explains the main reasons a visitor should choose KLICKWIZE.
+         Simple final brand area with fast links.
     ================================================== -->
-
-    <section
-        id="why"
-        class="section container">
-
-        <!-- Why Us header: introduces the value points. -->
-        <span class="section-label"> WHY KLICKWIZE </span>
-        <h2 class="section-title"> The Difference </h2>
-
-        <!-- Why Us grid: four cards that explain the company's advantages. -->
-        <div class="why-grid">
-
-            <!-- Why Card 1: Security First -->
-            <article class="why-card">
-                <h3>Security First</h3>
-                <p> Security is built into every solution from day one. </p>
-            </article>
-
-            <!-- Why Card 2: End-to-End Solutions -->
-            <article class="why-card">
-                <h3>End-to-End Solutions</h3>
-                <p> From strategy to deployment, everything works together. </p>
-            </article>
-
-            <!-- Why Card 3: Innovation Driven -->
-            <article class="why-card">
-                <h3>Innovation Driven</h3>
-                <p> AI, automation, and modern technologies used with purpose. </p>
-            </article>
-
-            <!-- Why Card 4: Built To Scale -->
-            <article class="why-card">
-                <h3>Built To Scale</h3>
-                <p> Solutions designed for growth, not just launch day. </p>
-            </article>
-
-        </div>
-
-    </section>
-
-    <!-- ==================================================
-         CALL TO ACTION
-
-         The final prompt that encourages visitors to take the next step.
-    ================================================== -->
-
-    <section
-        id="cta"
-        class="section container">
-
-        <!-- CTA content: short message plus the main project-start button. -->
-        <div class="cta-content">
-
-            <span class="section-label"> READY TO BUILD? </span>
-
-            <h2 class="cta-title"> Let's Build Something Secure. </h2>
-
-            <p class="cta-text">
-                Whether you need cybersecurity, software development,
-                automation, or digital growth solutions,
-                KLICKWIZE is ready to help.
-            </p>
-
-            <a
-                href="#services"
-                class="btn btn-primary cta-button">
-                Start Your Project
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a class="footer-brand" href="#hero">
+                <img src="assets/images/Logo.png" alt="">
+                <span><span class="brand-klick">KLICK</span><span class="brand-wize">WIZE</span></span>
             </a>
 
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <p>Click Wisely. Stay Secure.</p>
         </div>
-
-    </section>
-
-    <!-- ==================================================
-         SITE FOOTER
-
-         The bottom of the page with brand text, quick links,
-         and the final tagline.
-    ================================================== -->
-
-    <footer class="footer container">
-
-        <div class="footer-logo">
-
-            KLICKWIZE
-
-        </div>
-
-        <div class="footer-links">
-
-            <a href="#about">About</a>
-
-            <a href="#services">Services</a>
-
-            <a href="#process">Process</a>
-
-            <a href="#why">Why Us</a>
-
-        </div>
-
-        <p class="footer-copy">
-
-            Click Wisely. Stay Secure.
-
-        </p>
-
     </footer>
 
+    <!-- ==================================================
+         JAVASCRIPT FILES
+
+         Each file controls one behavior. This keeps the
+         website easy to understand and grow later.
+    ================================================== -->
+    <script src="js/navigation.js"></script>
+    <script src="js/splitText.js"></script>
+    <script src="js/decryptText.js"></script>
+    <script src="js/spark.js"></script>
+    <script src="js/stepper.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
