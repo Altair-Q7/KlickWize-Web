@@ -29,7 +29,7 @@
 
   function seedPoints() {
     points = [];
-    const total = window.innerWidth < 720 ? 34 : 72;
+    const total = window.innerWidth < 720 ? 45 : 90;
 
     for (let index = 0; index < total; index += 1) {
       points.push({
@@ -37,7 +37,7 @@
         y: Math.random() * height,
         vx: (Math.random() - .5) * .24,
         vy: (Math.random() - .5) * .24,
-        radius: Math.random() * 1.4 + .7
+        radius: Math.random() * 2 + 1.2
       });
     }
   }
@@ -61,8 +61,8 @@
           ctx.beginPath();
           ctx.moveTo(point.x, point.y);
           ctx.lineTo(next.x, next.y);
-          ctx.strokeStyle = `rgba(0,212,255,${(1 - distance / 150) * .16})`;
-          ctx.lineWidth = .6;
+          ctx.strokeStyle = `rgba(0,212,255,${(1 - distance / 150) * .35})`;
+          ctx.lineWidth = 1;
           ctx.stroke();
         }
       }
@@ -75,8 +75,8 @@
       ctx.beginPath();
       ctx.arc(point.x, point.y, point.radius + glow * 1.8, 0, Math.PI * 2);
       ctx.fillStyle = glow > 0
-        ? `rgba(124,236,255,${.35 + glow * .48})`
-        : 'rgba(0,212,255,.22)';
+        ? `rgba(124,236,255,${.5 + glow * .5})`
+        : 'rgba(0,212,255,.45)';
       ctx.fill();
 
       if (!prefersReducedMotion) {
