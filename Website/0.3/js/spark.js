@@ -31,15 +31,15 @@
 
   function seedPoints() {
     points = [];
-    const total = window.innerWidth < 720 ? 45 : 90;
+    const total = window.innerWidth < 720 ? 55 : 110;
 
     for (let index = 0; index < total; index += 1) {
       points.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - .5) * .24,
-        vy: (Math.random() - .5) * .24,
-        radius: Math.random() * 2 + 1.2
+        vx: (Math.random() - .5) * .28,
+        vy: (Math.random() - .5) * .28,
+        radius: Math.random() * 2.4 + 1.4
       });
     }
   }
@@ -53,7 +53,7 @@
     const currentScrollY = window.scrollY;
     const scrollDelta = currentScrollY - lastScrollY;
     lastScrollY = currentScrollY;
-    scrollVelocity += (scrollDelta - scrollVelocity) * 0.12;
+    scrollVelocity += (scrollDelta - scrollVelocity) * 0.18;
 
     ctx.clearRect(0, 0, width, height);
 
@@ -64,11 +64,11 @@
         const dy = point.y - next.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 150) {
+        if (distance < 200) {
           ctx.beginPath();
           ctx.moveTo(point.x, point.y);
           ctx.lineTo(next.x, next.y);
-          ctx.strokeStyle = `rgba(0,212,255,${(1 - distance / 150) * .35})`;
+          ctx.strokeStyle = `rgba(0,212,255,${(1 - distance / 200) * .5})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
@@ -77,18 +77,18 @@
       const mouseDx = point.x - mouse.x;
       const mouseDy = point.y - mouse.y;
       const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
-      const glow = mouseDistance < 130 ? 1 - mouseDistance / 130 : 0;
+      const glow = mouseDistance < 150 ? 1 - mouseDistance / 150 : 0;
 
       ctx.beginPath();
-      ctx.arc(point.x, point.y, point.radius + glow * 1.8, 0, Math.PI * 2);
+      ctx.arc(point.x, point.y, point.radius + glow * 2.2, 0, Math.PI * 2);
       ctx.fillStyle = glow > 0
-        ? `rgba(124,236,255,${.5 + glow * .5})`
-        : 'rgba(0,212,255,.45)';
+        ? `rgba(124,236,255,${.6 + glow * .4})`
+        : 'rgba(0,212,255,.55)';
       ctx.fill();
 
       if (!prefersReducedMotion) {
-        point.x += point.vx + scrollVelocity * 0.12;
-        point.y += point.vy + scrollVelocity * 0.08;
+        point.x += point.vx + scrollVelocity * 0.18;
+        point.y += point.vy + scrollVelocity * 0.12;
       }
 
       if (point.x < -10) point.x = width + 10;

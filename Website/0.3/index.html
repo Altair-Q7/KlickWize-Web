@@ -25,6 +25,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Oxanium:wght@500;600;700;800&family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- ==================================================
+         LOADING SCREEN STYLES
+
+         Inlined so the loader appears immediately.
+    ================================================== -->
+    <style>
+    #loader-overlay *{margin:0;padding:0;box-sizing:border-box}
+    #loader-overlay{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#01060f;font-family:'Montserrat',sans-serif;pointer-events:none;opacity:1;transition:opacity .9s ease,visibility .9s ease}
+    #loader-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    #loader-overlay .scan{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(5,30,120,0.02) 3px,rgba(5,30,120,0.02) 4px)}
+    #loader-overlay .cm{position:fixed;width:22px;height:22px;border-color:rgba(30,80,200,0.35);border-style:solid}
+    #loader-overlay .cm-tl{top:24px;left:24px;border-width:1px 0 0 1px}
+    #loader-overlay .cm-tr{top:24px;right:24px;border-width:1px 1px 0 0}
+    #loader-overlay .cm-bl{bottom:24px;left:24px;border-width:0 0 1px 1px}
+    #loader-overlay .cm-br{bottom:24px;right:24px;border-width:0 1px 1px 0}
+    #loader-overlay .content{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+    #loader-overlay .wordmark{line-height:1;animation:fadeup2 .9s .05s both}
+    #loader-overlay .wk{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,96px);letter-spacing:.07em;background:linear-gradient(150deg,#ffffff 0%,#ddeeff 45%,#a8ccff 85%,#7aadff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(120,180,255,0.2));display:inline-block}
+    #loader-overlay .ww{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,96px);letter-spacing:.07em;background:linear-gradient(150deg,#d8eeff 0%,#6aaeff 30%,#2060ee 62%,#0c30a0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 32px rgba(40,110,255,0.4));display:inline-block}
+    #loader-overlay .loader-wrap{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:14px;animation:fadeup2 .9s .45s both}
+    #loader-overlay .line-track{width:260px;height:1px;background:rgba(20,50,130,0.25);border-radius:1px;position:relative;overflow:hidden}
+    #loader-overlay .line-fill-l,#loader-overlay .line-fill-r{position:absolute;top:0;height:100%;width:0%;background:linear-gradient(90deg,#1040cc,#4a90ff,#88ccff);animation:grow-line2 3.2s cubic-bezier(.4,0,.15,1) .7s both}
+    #loader-overlay .line-fill-l{right:50%;border-radius:1px 0 0 1px;background:linear-gradient(270deg,#4a90ff,#1040cc)}
+    #loader-overlay .line-fill-r{left:50%;border-radius:0 1px 1px 0;background:linear-gradient(90deg,#4a90ff,#88ccff)}
+    @keyframes grow-line2{from{width:0%}to{width:50%}}
+    #loader-overlay .center-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;border-radius:50%;background:#4a90ff;box-shadow:0 0 8px #4a90ff,0 0 20px rgba(74,144,255,0.5);animation:dot-appear2 .4s .65s both}
+    @keyframes dot-appear2{from{opacity:0;transform:translate(-50%,-50%) scale(0)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+    #loader-overlay .ticker-dots{display:flex;gap:5px;margin-top:2px}
+    #loader-overlay .td{width:3px;height:3px;border-radius:50%;background:#0d2255;animation:td-blink2 1.6s ease infinite}
+    #loader-overlay .td:nth-child(2){animation-delay:.25s}
+    #loader-overlay .td:nth-child(3){animation-delay:.5s}
+    @keyframes td-blink2{0%,70%,100%{background:#0d2255}35%{background:#3a72dd}}
+    @keyframes fadeup2{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+
+    <!-- ==================================================
          CSS FILES
 
          Keep this order:
@@ -38,6 +73,37 @@
 </head>
 
 <body>
+    <!-- ==================================================
+         LOADING SCREEN OVERLAY
+
+         Full-screen loader that fades out once the page
+         is fully loaded (fonts, images, canvas, etc.).
+    ================================================== -->
+    <div id="loader-overlay">
+      <div class="scan"></div>
+      <div class="cm cm-tl"></div>
+      <div class="cm cm-tr"></div>
+      <div class="cm cm-bl"></div>
+      <div class="cm cm-br"></div>
+      <div class="content">
+        <div class="wordmark">
+          <span class="wk">KLICK</span><span class="ww">WIZE</span>
+        </div>
+        <div class="loader-wrap">
+          <div class="line-track">
+            <div class="line-fill-l"></div>
+            <div class="line-fill-r"></div>
+            <div class="center-dot"></div>
+          </div>
+          <div class="ticker-dots">
+            <div class="td"></div>
+            <div class="td"></div>
+            <div class="td"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ==================================================
          SPARK LAYER
 
@@ -411,11 +477,6 @@
     ================================================== -->
     <footer class="footer">
         <div class="container footer-inner">
-            <a class="footer-brand" href="#hero">
-                <img src="assets/images/Logo.png" alt="">
-                <span><span class="brand-klick">KLICK</span><span class="brand-wize">WIZE</span></span>
-            </a>
-
             <nav class="footer-links" aria-label="Footer navigation">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
@@ -439,6 +500,31 @@
     <script src="js/spark.js"></script>
     <script src="js/stepper.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- ==================================================
+         LOADER DISMISS
+
+         Hides the overlay once everything is loaded.
+         Minimum 2.5s so the animation is seen.
+    ================================================== -->
+    <script>
+    (function(){
+        var loader = document.getElementById('loader-overlay');
+        if (!loader) return;
+        var start = Date.now();
+        var minTime = 2500;
+        function dismiss() {
+            var elapsed = Date.now() - start;
+            var remaining = Math.max(0, minTime - elapsed);
+            setTimeout(function(){ loader.classList.add('hidden'); }, remaining);
+        }
+        if (document.readyState === 'complete') {
+            dismiss();
+        } else {
+            window.addEventListener('load', dismiss);
+        }
+    })();
+    </script>
 </body>
 
 </html>

@@ -20,9 +20,9 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .12), transparent 34rem),
-    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .1), transparent 30rem),
-    linear-gradient(180deg, #04070d 0%, var(--black) 45%, #05080e 100%);
+    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .14), transparent 34rem),
+    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .12), transparent 30rem),
+    linear-gradient(180deg, #020408 0%, var(--black) 45%, #03050a 100%);
   color: var(--white);
   font-family: var(--ff-body);
   line-height: 1.6;
@@ -76,7 +76,7 @@ textarea {
   z-index: -1;
   width: 100%;
   height: 100%;
-  opacity: .62;
+  opacity: .82;
   pointer-events: none;
 }
 
@@ -198,7 +198,7 @@ textarea {
 .footer {
   border-top: 1px solid var(--edge);
   padding: 2rem 0;
-  background: rgba(3, 5, 10, .72);
+  background: rgba(1, 3, 8, .85);
 }
 
 .footer-inner {

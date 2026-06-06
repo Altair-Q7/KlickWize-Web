@@ -22,7 +22,7 @@
       entry.target.classList.add('visible');
       revealObserver.unobserve(entry.target);
     });
-  }, { threshold: .14 });
+  }, { threshold: .08 });
 
   revealEls.forEach(el => revealObserver.observe(el));
 
