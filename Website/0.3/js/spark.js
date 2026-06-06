@@ -1,112 +1,183 @@
 /* =====================================================
-   SPARK.JS
-
-   Creates the background spark/network animation.
-   It is decorative, so it stays behind content and ignores clicks.
+   SPARK.JS — CYBER NETWORK CANVAS RENDERER
+   
+   Renders an animated particle-network on a fixed
+   <canvas> element that sits behind all page content.
+   
+   Rendering pipeline per frame:
+     1. Compute scroll velocity via low-pass filter
+     2. Clear the raster buffer
+     3. Draw proximity-weighted edges between nodes
+     4. Draw nodes with pointer-proximity glow
+     5. Advance node positions (velocity + scroll drift)
+     6. Wrap nodes at viewport boundaries
+   
+   Performance considerations:
+     - Canvas size is multiplied by devicePixelRatio
+       (capped at 2×) for HiDPI clarity.
+     - Node count scales with viewport width to
+       avoid overdraw on narrow (mobile) viewports.
+     - Edge drawing is O(n²) — kept manageable by
+       limiting the max node count to 130.
+     - All drawing is skipped when
+       prefers-reduced-motion: reduce is active.
 ===================================================== */
 
 (function () {
+  'use strict';
+
   const canvas = document.getElementById('spark-canvas');
   if (!canvas) return;
 
-  const ctx = canvas.getContext('2d');
+  const ctx                  = canvas.getContext('2d');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mouse = { x: -999, y: -999 };
-  let width = 0;
-  let height = 0;
-  let points = [];
-  let lastScrollY = window.scrollY;
-  let scrollVelocity = 0;
 
+  /* ── State ─────────────────────────────────────── */
+  const mouse         = { x: -999, y: -999 };
+  let   width         = 0;
+  let   height        = 0;
+  let   nodes         = [];
+  let   lastScrollY   = window.scrollY;
+  let   scrollVelocity = 0;
+
+  /* ── Canvas Initialisation ──────────────────────── */
+  /**
+   * fitCanvas — sizes the canvas backing buffer to the
+   * physical pixel resolution and scales the 2D context
+   * matrix to compensate, preventing blurry rendering
+   * on HiDPI displays.
+   */
   function fitCanvas() {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width * ratio;
-    canvas.height = height * ratio;
-    canvas.style.width = `${width}px`;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width     = window.innerWidth;
+    height    = window.innerHeight;
+
+    canvas.width  = width  * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width  = `${width}px`;
     canvas.style.height = `${height}px`;
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function seedPoints() {
-    points = [];
-    const total = window.innerWidth < 720 ? 55 : 110;
+  /* ── Node Pool ──────────────────────────────────── */
+  /**
+   * seedNodes — populates the nodes array with
+   * randomised positions and velocities.
+   * Count is reduced on narrow viewports to maintain
+   * a consistent frame budget.
+   */
+  function seedNodes() {
+    nodes = [];
+    const count = width < 720 ? 60 : 130;
 
-    for (let index = 0; index < total; index += 1) {
-      points.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - .5) * .28,
-        vy: (Math.random() - .5) * .28,
-        radius: Math.random() * 2.4 + 1.4
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x:      Math.random() * width,
+        y:      Math.random() * height,
+        vx:     (Math.random() - .5) * .6,
+        vy:     (Math.random() - .5) * .6,
+        radius: Math.random() * 1.8 + 1.0,
+        pulse:  Math.random() * Math.PI * 2, // phase offset for size pulsing
       });
     }
   }
 
+  /* ── Resize Handler ─────────────────────────────── */
   function resize() {
     fitCanvas();
-    seedPoints();
+    seedNodes();
   }
 
+  /* ── Frame Renderer ─────────────────────────────── */
+  /**
+   * draw — the main rAF callback.
+   * Called every animation frame (~16ms at 60fps).
+   */
   function draw() {
+    /* Scroll velocity: low-pass filter prevents
+       jitter from rapid successive scroll events.   */
     const currentScrollY = window.scrollY;
-    const scrollDelta = currentScrollY - lastScrollY;
-    lastScrollY = currentScrollY;
-    scrollVelocity += (scrollDelta - scrollVelocity) * 0.18;
+    scrollVelocity      += (currentScrollY - lastScrollY - scrollVelocity) * 0.18;
+    lastScrollY          = currentScrollY;
 
     ctx.clearRect(0, 0, width, height);
 
-    points.forEach((point, index) => {
-      for (let nextIndex = index + 1; nextIndex < points.length; nextIndex += 1) {
-        const next = points[nextIndex];
-        const dx = point.x - next.x;
-        const dy = point.y - next.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    const time = performance.now() * 0.001;
 
-        if (distance < 200) {
-          ctx.beginPath();
-          ctx.moveTo(point.x, point.y);
-          ctx.lineTo(next.x, next.y);
-          ctx.strokeStyle = `rgba(0,212,255,${(1 - distance / 200) * .5})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
+    /* ── Edge Pass: draw lines between close nodes ── */
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b  = nodes[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+
+        if (d >= 200) continue;
+
+        const alpha = (1 - d / 200) * 0.28;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(0,212,255,${alpha.toFixed(3)})`;
+        ctx.lineWidth   = 0.6;
+        ctx.stroke();
       }
+    }
 
-      const mouseDx = point.x - mouse.x;
-      const mouseDy = point.y - mouse.y;
-      const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
-      const glow = mouseDistance < 150 ? 1 - mouseDistance / 150 : 0;
+    /* ── Node Pass: draw and advance each particle ── */
+    nodes.forEach((node) => {
+      /* Pointer proximity glow factor (0–1) */
+      const mdx   = node.x - mouse.x;
+      const mdy   = node.y - mouse.y;
+      const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+      const glow  = mdist < 160 ? 1 - mdist / 160 : 0;
+
+      /* Subtle size pulse using per-node phase offset */
+      const pulseFactor = 1 + Math.sin(time * 2.4 + node.pulse) * 0.3;
+      const r           = (node.radius + glow * 1.8) * pulseFactor;
 
       ctx.beginPath();
-      ctx.arc(point.x, point.y, point.radius + glow * 2.2, 0, Math.PI * 2);
+      ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
       ctx.fillStyle = glow > 0
-        ? `rgba(124,236,255,${.6 + glow * .4})`
-        : 'rgba(0,212,255,.55)';
+        ? `rgba(124,236,255,${(0.35 + glow * 0.45).toFixed(3)})`
+        : `rgba(0,212,255,${(0.25 + Math.sin(time + node.pulse) * 0.06).toFixed(3)})`;
       ctx.fill();
 
-      if (!prefersReducedMotion) {
-        point.x += point.vx + scrollVelocity * 0.18;
-        point.y += point.vy + scrollVelocity * 0.12;
+      /* Glow halo on pointer proximity */
+      if (glow > 0.2) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, r * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,212,255,${(glow * 0.08).toFixed(3)})`;
+        ctx.fill();
       }
 
-      if (point.x < -10) point.x = width + 10;
-      if (point.x > width + 10) point.x = -10;
-      if (point.y < -10) point.y = height + 10;
-      if (point.y > height + 10) point.y = -10;
+      /* Position integration (skip if reduced-motion) */
+      if (!prefersReducedMotion) {
+        node.x += node.vx + scrollVelocity * 0.4;
+        node.y += node.vy + scrollVelocity * 0.25;
+      }
+
+      /* Toroidal boundary wrap */
+      if (node.x < -10)        node.x = width  + 10;
+      if (node.x > width  + 10) node.x = -10;
+      if (node.y < -10)        node.y = height + 10;
+      if (node.y > height + 10) node.y = -10;
     });
 
-    window.requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
 
-  window.addEventListener('pointermove', event => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+  /* ── Event Listeners ────────────────────────────── */
+  window.addEventListener('pointermove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   }, { passive: true });
 
   window.addEventListener('resize', resize, { passive: true });
 
+  /* ── Bootstrap ──────────────────────────────────── */
   resize();
   draw();
 })();

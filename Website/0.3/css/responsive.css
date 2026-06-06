@@ -129,10 +129,6 @@
     width: 100%;
   }
 
-  .orbital-logo {
-    width: min(330px, 86vw);
-  }
-
   .hero-actions,
   .contact-actions {
     align-items: stretch;
@@ -172,5 +168,12 @@
   .rotating-line {
     display: grid;
     gap: .25rem;
+  }
+}
+
+/* ── 1080px breakpoint additions ──────────────────── */
+@media (max-width: 1080px) {
+  .hero-card--secondary {
+    display: none; /* hide secondary card to reduce visual noise on tablet */
   }
 }

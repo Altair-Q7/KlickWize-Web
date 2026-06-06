@@ -20,9 +20,9 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .14), transparent 34rem),
-    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .12), transparent 30rem),
-    linear-gradient(180deg, #020408 0%, var(--black) 45%, #03050a 100%);
+    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .08), transparent 34rem),
+    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .06), transparent 30rem),
+    linear-gradient(180deg, #010204 0%, var(--black) 45%, #020306 100%);
   color: var(--white);
   font-family: var(--ff-body);
   line-height: 1.6;
@@ -36,8 +36,8 @@ body::before {
   z-index: -2;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, black, transparent 82%);
 }
@@ -78,6 +78,25 @@ textarea {
   height: 100%;
   opacity: .82;
   pointer-events: none;
+}
+
+#bg-logo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: .07;
+  perspective: 800px;
+}
+
+#bg-logo img {
+  width: min(520px, 80vw);
+  aspect-ratio: 1;
+  object-fit: contain;
+  filter: drop-shadow(0 0 80px rgba(0, 212, 255, .15));
+  transform: perspective(900px) rotateX(-4deg) rotateY(6deg);
 }
 
 /* =====================================================
@@ -210,3 +229,39 @@ textarea {
   color: var(--muted);
   font-size: .92rem;
 }
+
+/* =====================================================
+   AMBIENT MESH ORBS — VERSION 0.4
+   
+   Two fixed radial gradient blobs that layer beneath
+   the canvas for atmospheric depth. Scroll-parallax
+   transform applied by app.js via data-orb-* hooks.
+===================================================== */
+
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+  will-change: transform;
+}
+
+.orb-a {
+  top: -15vw;
+  left: -10vw;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(0, 212, 255, .07) 0%, transparent 65%);
+  animation: orbitA 12s ease-in-out infinite;
+}
+
+.orb-b {
+  bottom: -20vw;
+  right: -15vw;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(71, 118, 255, .06) 0%, transparent 65%);
+  animation: orbitB 16s ease-in-out infinite;
+}
+
+

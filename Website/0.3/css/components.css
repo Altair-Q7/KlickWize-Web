@@ -256,47 +256,6 @@
   animation: flipWord .38s var(--ease);
 }
 
-/* =====================================================
-   HERO VISUAL / CIRCULAR TEXT
-===================================================== */
-
-.orbital-logo {
-  position: relative;
-  width: min(420px, 82vw);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(0, 212, 255, .16), transparent 58%),
-    linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  border: 1px solid var(--edge);
-  box-shadow: var(--shadow-md), inset 0 0 44px rgba(0, 212, 255, .08);
-  overflow: visible;
-}
-
-.orbital-logo img {
-  width: 52%;
-  border-radius: 24px;
-  filter: drop-shadow(0 0 42px rgba(0, 212, 255, .32));
-  z-index: 2;
-}
-
-.circular-text {
-  position: absolute;
-  inset: 7%;
-  width: 86%;
-  height: 86%;
-  animation: spinCircle 18s linear infinite;
-}
-
-.circular-text text {
-  fill: var(--cyan-bright);
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
 .glass-panel {
   border: 1px solid var(--edge);
   border-radius: var(--radius-lg);
@@ -339,7 +298,7 @@
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  animation: marquee 18s linear infinite;
 }
 
 .marquee-track span,
@@ -419,9 +378,16 @@
 
 .value-card span,
 .service-number {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
   color: var(--cyan);
   font-family: var(--ff-mono);
   font-size: .78rem;
+}
+
+.service-number svg {
+  flex-shrink: 0;
 }
 
 .value-card h3,
@@ -605,4 +571,125 @@
 
 .footer-links a:hover {
   color: var(--cyan);
+}
+
+/* =====================================================
+   STATS ROW — ANIMATED COUNTER COMPONENT
+   
+   Four metric cards arranged in a horizontal strip.
+   Numbers are rolled up by app.js on viewport entry.
+===================================================== */
+
+/* =====================================================
+   HERO VISUAL — SECONDARY CARD
+   
+   A second glass panel in the hero visual column,
+   slightly offset to create a layered depth effect.
+===================================================== */
+
+.hero-card--secondary {
+  width: min(220px, 80%);
+  margin-left: 2rem;
+  margin-top: -1rem;
+  align-self: flex-start;
+}
+
+.hero-card-icon {
+  margin: .5rem 0;
+  color: var(--cyan);
+}
+
+
+
+/* =====================================================
+   SERVICE CARD ADDITIONS — VERSION 0.4
+   
+   Tag badge in the bottom-right corner indicating
+   which phase of the lifecycle the service belongs to.
+===================================================== */
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-tag {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: inline-block;
+  color: var(--cyan);
+  font-family: var(--ff-mono);
+  font-size: .67rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .55;
+  transition: opacity var(--duration-fast);
+}
+
+.service-card:hover .service-tag {
+  opacity: 1;
+}
+
+
+/* =====================================================
+   WHY CARD ADDITIONS — ICON SLOT
+   
+   Each why-card gains a small SVG icon above the
+   heading, coloured with the cyan accent.
+===================================================== */
+
+.why-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--edge);
+  background: var(--cyan-soft);
+  color: var(--cyan);
+  margin-bottom: .75rem;
+  transition: background var(--duration-normal), border-color var(--duration-normal), box-shadow var(--duration-normal);
+}
+
+.why-card:hover .why-icon {
+  background: rgba(0, 212, 255, .18);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+
+/* =====================================================
+   HERO SCANLINE — DECORATIVE OVERLAY
+   
+   A single-pixel horizontal line that sweeps across
+   the hero section once to evoke a radar/scan effect.
+===================================================== */
+
+.hero-scanline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-scanline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 212, 255, .35) 30%,
+    rgba(0, 212, 255, .6)  50%,
+    rgba(0, 212, 255, .35) 70%,
+    transparent 100%);
+  animation: scanSweep 3s var(--ease-out) 3s 1 forwards;
+  opacity: 0;
+}
+
+@keyframes scanSweep {
+  0%   { top: 0%;   opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
