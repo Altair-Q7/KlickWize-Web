@@ -41,10 +41,10 @@
   ================================================ -->
   <style>
   #loader-overlay *{margin:0;padding:0;box-sizing:border-box}
-  #loader-overlay{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#01060f;font-family:'Montserrat',sans-serif;pointer-events:none;opacity:1;transition:opacity .9s ease,visibility .9s ease}
+  #loader-overlay{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000000;font-family:'Montserrat',sans-serif;pointer-events:none;opacity:1;transition:opacity .9s ease,visibility .9s ease}
   #loader-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-  #loader-overlay .scan{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(5,30,120,0.02) 3px,rgba(5,30,120,0.02) 4px)}
-  #loader-overlay .cm{position:fixed;width:22px;height:22px;border-color:rgba(30,80,200,0.35);border-style:solid}
+  #loader-overlay .scan{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px)}
+  #loader-overlay .cm{position:fixed;width:22px;height:22px;border-color:rgba(255,255,255,0.15);border-style:solid}
   #loader-overlay .cm-tl{top:24px;left:24px;border-width:1px 0 0 1px}
   #loader-overlay .cm-tr{top:24px;right:24px;border-width:1px 1px 0 0}
   #loader-overlay .cm-bl{bottom:24px;left:24px;border-width:0 0 1px 1px}
@@ -54,7 +54,7 @@
   #loader-overlay .wk{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,96px);letter-spacing:.07em;background:linear-gradient(150deg,#ffffff 0%,#ddeeff 45%,#a8ccff 85%,#7aadff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(120,180,255,0.2));display:inline-block}
   #loader-overlay .ww{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,96px);letter-spacing:.07em;background:linear-gradient(150deg,#d8eeff 0%,#6aaeff 30%,#2060ee 62%,#0c30a0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 32px rgba(40,110,255,0.4));display:inline-block}
   #loader-overlay .loader-wrap{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:14px;animation:fadeup2 .9s .45s both}
-  #loader-overlay .line-track{width:260px;height:1px;background:rgba(20,50,130,0.25);border-radius:1px;position:relative;overflow:hidden}
+  #loader-overlay .line-track{width:260px;height:1px;background:rgba(255,255,255,0.08);border-radius:1px;position:relative;overflow:hidden}
   #loader-overlay .line-fill-l,#loader-overlay .line-fill-r{position:absolute;top:0;height:100%;width:0%;animation:grow-line2 3.2s cubic-bezier(.4,0,.15,1) .7s both}
   #loader-overlay .line-fill-l{right:50%;border-radius:1px 0 0 1px;background:linear-gradient(270deg,#4a90ff,#1040cc)}
   #loader-overlay .line-fill-r{left:50%;border-radius:0 1px 1px 0;background:linear-gradient(90deg,#4a90ff,#88ccff)}
@@ -62,10 +62,10 @@
   #loader-overlay .center-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;border-radius:50%;background:#4a90ff;box-shadow:0 0 8px #4a90ff,0 0 20px rgba(74,144,255,0.5);animation:dot-appear2 .4s .65s both}
   @keyframes dot-appear2{from{opacity:0;transform:translate(-50%,-50%) scale(0)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
   #loader-overlay .ticker-dots{display:flex;gap:5px;margin-top:2px}
-  #loader-overlay .td{width:3px;height:3px;border-radius:50%;background:#0d2255;animation:td-blink2 1.6s ease infinite}
+  #loader-overlay .td{width:3px;height:3px;border-radius:50%;background:#222222;animation:td-blink2 1.6s ease infinite}
   #loader-overlay .td:nth-child(2){animation-delay:.25s}
   #loader-overlay .td:nth-child(3){animation-delay:.5s}
-  @keyframes td-blink2{0%,70%,100%{background:#0d2255}35%{background:#3a72dd}}
+  @keyframes td-blink2{0%,70%,100%{background:#222222}35%{background:#555555}}
   @keyframes fadeup2{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
   </style>
 
@@ -253,21 +253,47 @@
           </div>
         </div>
 
-        <div class="hero-visual" aria-label="KLICKWIZE key metrics">
-          <!-- Stat card 1 -->
-          <div class="hero-card glass-panel" data-tilt>
-            <span class="card-label">Service Pillars</span>
-            <div class="shuffle-number" data-shuffle-number data-final="6">0</div>
-            <p>Security embedded at every layer of every service.</p>
+        <!-- ============================================
+             SERVICE SHOWCASE — HERO VISUAL COMPONENT
+
+             Cycles through all six service pillars.
+             Content is data-driven via serviceCycle.js.
+             Transition model: vertical clip-path wipe.
+             Pauses on hover; dot nav for manual control.
+        ============================================ -->
+        <div class="service-showcase glass-panel" id="service-showcase" aria-label="Our services">
+
+          <!-- Slide content region — clip-path wipe target -->
+          <div class="sc-slide" data-sc-slide>
+
+            <!-- Service number (01–06) -->
+            <span class="sc-number" data-sc-number>01</span>
+
+            <!-- Icon slot — SVG injected by serviceCycle.js -->
+            <div class="sc-icon" data-sc-icon></div>
+
+            <!-- Service name — large display type -->
+            <h3 class="sc-name" data-sc-name>Cybersecurity</h3>
+
+            <!-- Category tag -->
+            <span class="sc-tag" data-sc-tag>Core Practice</span>
+
+            <!-- One-line description -->
+            <p class="sc-copy" data-sc-copy>
+              Threat mitigation and protection for digital systems,
+              infrastructure, and business operations.
+            </p>
+
           </div>
-          <!-- Stat card 2 — floats slightly offset for depth -->
-          <div class="hero-card hero-card--secondary glass-panel" data-tilt>
-            <span class="card-label">Security-First</span>
-            <div class="hero-card-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+
+          <!-- Bottom bar: dot nav + progress indicator -->
+          <div class="sc-footer">
+            <div class="sc-dots" data-sc-dots role="tablist" aria-label="Service navigation"></div>
+            <div class="sc-progress-track" aria-hidden="true">
+              <div class="sc-progress" data-sc-progress></div>
             </div>
-            <p>Protection is the foundation, not the afterthought.</p>
           </div>
+
         </div>
       </div>
 
@@ -656,6 +682,7 @@
   <script src="js/decryptText.js"></script>
   <script src="js/spark.js"></script>
   <script src="js/stepper.js"></script>
+  <script src="js/serviceCycle.js"></script>
   <script src="js/app.js"></script>
 
 

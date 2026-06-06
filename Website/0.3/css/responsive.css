@@ -149,6 +149,15 @@
     border-radius: var(--radius-sm);
   }
 
+  .stepper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stepper-panel {
+    order: -1;
+  }
+
   .footer-inner {
     display: grid;
     justify-items: center;
@@ -175,5 +184,49 @@
 @media (max-width: 1080px) {
   .hero-card--secondary {
     display: none; /* hide secondary card to reduce visual noise on tablet */
+  }
+}
+
+/* ── Service Showcase Responsive ─────────────────── */
+
+/* Tablet: showcase goes full-width below the copy  */
+@media (max-width: 900px) {
+  .hero-visual {
+    align-items: stretch;
+  }
+
+  .service-showcase {
+    max-width: 100%;
+    min-height: 320px;
+  }
+
+  .sc-name {
+    font-size: 2.4rem;
+  }
+}
+
+/* Mobile: tighten padding, reduce icon size */
+@media (max-width: 520px) {
+  .service-showcase {
+    padding: 1.8rem 1.5rem 1.3rem;
+    min-height: 280px;
+  }
+
+  .sc-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .sc-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .sc-name {
+    font-size: 2rem;
+  }
+
+  .sc-copy {
+    font-size: .86rem;
   }
 }

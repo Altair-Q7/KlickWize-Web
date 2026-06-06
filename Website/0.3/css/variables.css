@@ -13,11 +13,11 @@
 
 :root {
   /* ── Chromatic Scale ──────────────────────────── */
-  --black:          #000102;
-  --deep:           #03060c;
-  --surface:        #0d1420;
-  --panel:          rgba(13, 20, 32, .78);
-  --panel-strong:   #111a29;
+  --black:          #000000;
+  --deep:           #010101;
+  --surface:        #050505;
+  --panel:          rgba(5, 5, 5, .78);
+  --panel-strong:   #080808;
 
   /* ── Brand Accent Tokens ──────────────────────── */
   --cyan:           #00d4ff;
@@ -85,5 +85,5 @@
   --gradient-primary:  linear-gradient(135deg, var(--cyan), var(--blue));
   --gradient-metal:    linear-gradient(115deg, #6d7a86 0%, #f8fbff 18%, #7cecff 36%, #41566a 55%, #ffffff 74%, #80e8ff 100%);
   --gradient-panel:    linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
-  --gradient-hero:     radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,212,255,.08), transparent 70%);
+  --gradient-hero:     radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,212,255,.04), transparent 70%);
 }

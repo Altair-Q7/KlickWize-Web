@@ -20,9 +20,9 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .08), transparent 34rem),
-    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .06), transparent 30rem),
-    linear-gradient(180deg, #010204 0%, var(--black) 45%, #020306 100%);
+    radial-gradient(circle at 20% 0%, rgba(0, 212, 255, .04), transparent 34rem),
+    radial-gradient(circle at 88% 12%, rgba(71, 118, 255, .03), transparent 30rem),
+    linear-gradient(180deg, #000000 0%, var(--black) 45%, #000000 100%);
   color: var(--white);
   font-family: var(--ff-body);
   line-height: 1.6;
@@ -175,10 +175,9 @@ textarea {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  min-height: 540px;
+  align-items: flex-end;
   justify-content: center;
+  min-height: 480px;
 }
 
 .split-section,

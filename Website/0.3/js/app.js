@@ -119,7 +119,7 @@
      the radial-gradient origin, creating a torch-light
      that follows the pointer.
   ──────────────────────────────────────────────── */
-  document.querySelectorAll('.value-card, .service-card, .why-card').forEach((card) => {
+  document.querySelectorAll('.value-card, .service-card, .why-card, .service-showcase').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--mx', `${((e.clientX - rect.left) / rect.width)  * 100}%`);
