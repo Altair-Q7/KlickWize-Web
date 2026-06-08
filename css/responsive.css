@@ -283,13 +283,22 @@
     border-radius: var(--radius-md);
   }
 
+  .footer {
+    padding: 1.5rem 0;
+  }
+
   .sc-footer {
     display: grid;
     gap: .8rem;
+    justify-items: center;
   }
 
   .sc-progress-track {
     width: 100%;
+  }
+
+  .footer-links {
+    gap: .7rem;
   }
 
   .marquee-track span,
