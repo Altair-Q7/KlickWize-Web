@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ================================================
+       DOCUMENT METADATA & VIEWPORT CONFIGURATION
+       
+       charset UTF-8 ensures correct encoding of all
+       Unicode characters in content and attributes.
+       The viewport meta tag prevents iOS auto-scaling
+       and sets the initial zoom level to 1.0.
+  ================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KLICKWIZE delivers cybersecurity, digital transformation, software, AI automation, cloud, DevOps, and growth solutions with security built in from day one.">
+  <title>KLICKWIZE | Click Wisely. Stay Secure.</title>
+
+  <!-- ================================================
+       TYPEFACE LOADING — GOOGLE FONTS
+       
+       preconnect hints instruct the browser to open
+       a TCP connection to fonts.googleapis.com early,
+       reducing latency for the stylesheet request.
+       
+       Typeface roles:
+         Bebas Neue   — primary display / wordmark
+         Oxanium      — secondary display fallback
+         Inter        — long-form body copy
+         JetBrains Mono / DM Mono — labels & monospace
+  ================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Oxanium:wght@500;600;700;800&family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- ================================================
+       CRITICAL CSS — LOADING SCREEN
+       
+       Inlined to prevent FOUC (Flash of Unstyled Content).
+       The loader overlay must be visually complete before
+       the main stylesheet bundle has finished parsing.
+  ================================================ -->
+  <style>
+  #loader-overlay *{margin:0;padding:0;box-sizing:border-box}
+  #loader-overlay{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000000;font-family:'Montserrat',sans-serif;pointer-events:none;opacity:1;transition:opacity .9s ease,visibility .9s ease}
+  #loader-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  #loader-overlay .scan{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px)}
+  #loader-overlay .cm{position:fixed;width:22px;height:22px;border-color:rgba(255,255,255,0.15);border-style:solid}
+  #loader-overlay .cm-tl{top:24px;left:24px;border-width:1px 0 0 1px}
+  #loader-overlay .cm-tr{top:24px;right:24px;border-width:1px 1px 0 0}
+  #loader-overlay .cm-bl{bottom:24px;left:24px;border-width:0 0 1px 1px}
+  #loader-overlay .cm-br{bottom:24px;right:24px;border-width:0 1px 1px 0}
+  #loader-overlay .content{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+  #loader-overlay .wordmark{line-height:1;animation:fadeup2 .9s .05s both}
+  #loader-overlay .wk{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,96px);letter-spacing:.07em;background:linear-gradient(150deg,#ffffff 0%,#ddeeff 45%,#a8f9ff 85%,#7afff4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(120, 253, 255, 0.2));display:inline-block}
+  #loader-overlay .ww{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,96px);letter-spacing:.07em;background:linear-gradient(150deg,#d8eeff 0%,#6affff 30%,#20cfee 62%,#0c8aa0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 32px rgba(40, 241, 255, 0.4));display:inline-block}
+  #loader-overlay .loader-wrap{margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:14px;animation:fadeup2 .9s .45s both}
+  #loader-overlay .line-track{width:260px;height:1px;background:rgba(255,255,255,0.08);border-radius:1px;position:relative;overflow:hidden}
+  #loader-overlay .line-fill-l,#loader-overlay .line-fill-r{position:absolute;top:0;height:100%;width:0%;animation:grow-line2 3.2s cubic-bezier(.4,0,.15,1) .7s both}
+  #loader-overlay .line-fill-l{right:50%;border-radius:1px 0 0 1px;background:linear-gradient(270deg,#4accff,#10adcc)}
+  #loader-overlay .line-fill-r{left:50%;border-radius:0 1px 1px 0;background:linear-gradient(90deg,#4a90ff,#88edff)}
+  @keyframes grow-line2{from{width:0%}to{width:50%}}
+  #loader-overlay .center-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;border-radius:50%;background:#4a90ff;box-shadow:0 0 8px #4a90ff,0 0 20px rgba(74,144,255,0.5);animation:dot-appear2 .4s .65s both}
+  @keyframes dot-appear2{from{opacity:0;transform:translate(-50%,-50%) scale(0)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+  #loader-overlay .ticker-dots{display:flex;gap:5px;margin-top:2px}
+  #loader-overlay .td{width:3px;height:3px;border-radius:50%;background:#222222;animation:td-blink2 1.6s ease infinite}
+  #loader-overlay .td:nth-child(2){animation-delay:.25s}
+  #loader-overlay .td:nth-child(3){animation-delay:.5s}
+  @keyframes td-blink2{0%,70%,100%{background:#222222}35%{background:#555555}}
+  @keyframes fadeup2{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+
+  <!-- ================================================
+       STYLESHEET BUNDLE — LOAD ORDER IS SIGNIFICANT
+       
+       Cascade order:
+         variables  → design token definitions
+         layout     → structural geometry & positioning
+         components → reusable UI primitives
+         animations → keyframes & motion utilities
+         responsive → breakpoint overrides (mobile-last)
+  ================================================ -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+  <!-- ================================================
+       LOADING SCREEN OVERLAY
+       
+       Renders immediately from inlined critical CSS.
+       Dismissed by the IIFE at the bottom of <body>
+       once the `load` event fires (all resources ready),
+       with a minimum display duration of 2.5s to
+       guarantee the load animation completes.
+  ================================================ -->
+  <div id="loader-overlay">
+    <div class="scan"></div>
+    <div class="cm cm-tl"></div>
+    <div class="cm cm-tr"></div>
+    <div class="cm cm-bl"></div>
+    <div class="cm cm-br"></div>
+    <div class="content">
+      <div class="wordmark">
+        <span class="wk">KLICK</span><span class="ww">WIZE</span>
+      </div>
+      <div class="loader-wrap">
+        <div class="line-track">
+          <div class="line-fill-l"></div>
+          <div class="line-fill-r"></div>
+          <div class="center-dot"></div>
+        </div>
+        <div class="ticker-dots">
+          <div class="td"></div>
+          <div class="td"></div>
+          <div class="td"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ================================================
+        PARTICLE NETWORK CANVAS
+       
+       Rendered by spark.js. Fixed-positioned so it
+       persists across scroll. z-index: -1 keeps it
+       beneath all page content. aria-hidden prevents
+       screen readers from announcing it.
+  ================================================ -->
+  <canvas id="spark-canvas" class="spark-canvas" aria-hidden="true"></canvas>
+
+  <!-- ================================================
+       AMBIENT MESH GRADIENT ORBS
+       
+       Pure CSS radial gradient layers that provide
+       atmospheric depth. Driven by app.js scroll
+       parallax via [data-orb-a] / [data-orb-b].
+  ================================================ -->
+  <div class="orb orb-a" data-orb-a aria-hidden="true"></div>
+  <div class="orb orb-b" data-orb-b aria-hidden="true"></div>
+
+  <!-- ================================================
+       BACKGROUND LOGO — STATIC DECORATIVE LAYER
+       
+       Sits on z-index: -1, behind content.
+       Opacity is low (~7%) so it reads as texture,
+       not decoration. Fixed 3D rotation applied via CSS.
+  ================================================ -->
+  <div id="bg-logo" aria-hidden="true">
+    <img src="assets/images/Logo.png" alt="">
+  </div>
+
+  <!-- ================================================
+       SITE HEADER — FIXED NAVIGATION BAR
+       
+       Transparent on landing; gains a frosted-glass
+       backdrop when the user scrolls past ~40px
+       (`.scrolled` class added by navigation.js).
+  ================================================ -->
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Primary navigation">
+      <a href="#hero" class="brand-mark" aria-label="KLICKWIZE — return to top">
+        <img src="assets/images/Logo.png" alt="KLICKWIZE shield logo">
+        <span>
+          <strong><span class="brand-klick">KLICK</span><span class="brand-wize">WIZE</span></strong>
+          <small>Click wisely. Stay secure.</small>
+        </span>
+      </a>
+
+      <!-- Pill navigation: active link is set by
+           navigation.js IntersectionObserver       -->
+      <ul class="pill-nav" data-pill-nav>
+        <li><a class="active" href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-ghost nav-doc"
+           href="assets/docs/Documentation.pdf"
+           target="_blank" rel="noreferrer">Docs</a>
+        <a class="btn btn-primary nav-cta magnetic" href="#contact">Let's Talk</a>
+        <button class="menu-toggle" type="button"
+                data-menu-toggle
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile off-canvas menu (shown by navigation.js) -->
+    <div class="staggered-menu" data-mobile-menu aria-hidden="true">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==============================================
+         HERO SECTION
+         
+         Full-viewport-height landing panel.
+         Contains: eyebrow label (glitch), display
+         headline (split-text character animation),
+         rotating/typed text, CTA row, and a glass
+         stat card with shuffle-number counter.
+    ============================================== -->
+    <section id="hero" class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+
+          <!-- Glitch eyebrow: data-text mirrors content
+               for CSS ::before / ::after clones        -->
+          <p class="eyebrow decrypt-text glitch"
+             data-text="SECURITY-FIRST DIGITAL TRANSFORMATION">
+            SECURITY-FIRST DIGITAL TRANSFORMATION
+          </p>
+
+          <h1 class="hero-title">
+            <span class="split-text">Secure</span>
+            <span class="split-text accent">Build</span>
+            <span class="split-text">Grow</span>
+          </h1>
+
+          <p class="hero-description">
+            KLICKWIZE combines cybersecurity expertise with modern technology services to deliver
+            secure, end-to-end digital solutions across the complete business lifecycle.
+          </p>
+
+          <!-- Rotating text: data-words drives the swap
+               interval; typed-cursor class added by app.js -->
+          <div class="rotating-line" aria-live="polite">
+            <span>Focused on</span>
+            <strong data-rotating-text
+                    data-words="Cybersecurity,Digital Transformation,Business Growth,AI Automation,Cloud Resilience">
+              Cybersecurity
+            </strong>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary magnetic" href="#contact">Start a Project</a>
+            <a class="btn btn-secondary" href="#services">Explore Services</a>
+          </div>
+        </div>
+
+        <!-- ============================================
+             SERVICE SHOWCASE — HERO VISUAL COMPONENT
+
+             Cycles through all six service pillars.
+             Content is data-driven via serviceCycle.js.
+             Transition model: vertical clip-path wipe.
+             Pauses on hover; dot nav for manual control.
+        ============================================ -->
+        <div class="service-showcase glass-panel" id="service-showcase" aria-label="Our services">
+
+          <!-- Slide content region — clip-path wipe target -->
+          <div class="sc-slide" data-sc-slide>
+
+            <!-- Service number (01–06) -->
+            <span class="sc-number" data-sc-number>01</span>
+
+            <!-- Icon slot — SVG injected by serviceCycle.js -->
+            <div class="sc-icon" data-sc-icon></div>
+
+            <!-- Service name — large display type -->
+            <h3 class="sc-name" data-sc-name>Cybersecurity</h3>
+
+            <!-- Category tag -->
+            <span class="sc-tag" data-sc-tag>Core Practice</span>
+
+            <!-- One-line description -->
+            <p class="sc-copy" data-sc-copy>
+              Threat mitigation and protection for digital systems,
+              infrastructure, and business operations.
+            </p>
+
+          </div>
+
+          <!-- Bottom bar: dot nav + progress indicator -->
+          <div class="sc-footer">
+            <div class="sc-dots" data-sc-dots role="tablist" aria-label="Service navigation"></div>
+            <div class="sc-progress-track" aria-hidden="true">
+              <div class="sc-progress" data-sc-progress></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Decorative scan-line that sweeps across the hero -->
+      <div class="hero-scanline" aria-hidden="true"></div>
+    </section>
+
+
+    <!-- ==============================================
+         MARQUEE / SERVICE TICKER
+         
+         Infinite horizontal scroll strip listing the
+         six service pillars. aria-hidden keeps it out
+         of the accessibility tree (decorative only).
+    ============================================== -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Cybersecurity</span><b>+</b>
+        <span>Web Development</span><b>+</b>
+        <span>Mobile Apps</span><b>+</b>
+        <span>AI Automation</span><b>+</b>
+        <span>Cloud & DevOps</span><b>+</b>
+        <span>Digital Growth</span><b>+</b>
+        <span>Cybersecurity</span><b>+</b>
+        <span>Web Development</span><b>+</b>
+        <span>Mobile Apps</span><b>+</b>
+        <span>AI Automation</span><b>+</b>
+        <span>Cloud & DevOps</span><b>+</b>
+        <span>Digital Growth</span><b>+</b>
+      </div>
+    </div>
+
+
+    <!-- ==============================================
+         ABOUT
+         
+         Company overview with three value-proposition
+         cards (Security, Innovation, Growth).
+         Uses reveal-left / reveal-right directional
+         entrance animations.
+    ============================================== -->
+    <section id="about" class="section">
+      <div class="container split-section">
+        <div class="section-copy reveal-left">
+          <p class="section-label decrypt-text" data-text="ABOUT KLICKWIZE">ABOUT KLICKWIZE</p>
+          <h2 class="section-title metallic-text">Security is not an afterthought.</h2>
+          <p>
+            KLICKWIZE is a technology-driven company specialising in Cybersecurity,
+            Digital Transformation, and Business Growth Solutions.
+          </p>
+          <p>
+            The company combines advanced cybersecurity expertise with modern technology
+            services: protecting critical infrastructure, building customer-facing
+            applications, and automating business workflows.
+          </p>
+        </div>
+
+        <!-- data-stagger causes app.js to assign sequential
+             --stagger-index delays to each child card.      -->
+        <div class="value-stack reveal-right" data-stagger>
+          <article class="value-card metallic-card" data-tilt>
+            <span>01</span>
+            <h3>Security</h3>
+            <p>Protecting what matters most, always.</p>
+          </article>
+          <article class="value-card metallic-card" data-tilt>
+            <span>02</span>
+            <h3>Innovation</h3>
+            <p>Harnessing technology to solve real problems.</p>
+          </article>
+          <article class="value-card metallic-card" data-tilt>
+            <span>03</span>
+            <h3>Growth</h3>
+            <p>Turning digital investment into measurable results.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         SERVICES — SIX PILLAR GRID
+         
+         Each card gets [data-tilt] for 3D hover and
+         a pointer-tracked radial glow via app.js.
+         Icons are inline SVG to avoid extra HTTP requests.
+    ============================================== -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-label">SERVICES</p>
+          <h2 class="section-title metallic-text">Six pillars. One security-first partner.</h2>
+        </div>
+
+        <div class="services-grid reveal" data-stagger>
+
+          <article class="service-card" data-tilt>
+            <span class="service-number">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <h3>Cybersecurity Solutions</h3>
+            <p>Threat mitigation and protection for digital systems, infrastructure, and business operations.</p>
+            <span class="service-tag">Core Practice</span>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <span class="service-number">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <h3>Web Development</h3>
+            <p>Modern websites and custom web applications for customer-facing and operational needs.</p>
+            <span class="service-tag">Build</span>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <span class="service-number">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            </span>
+            <h3>Mobile App Development</h3>
+            <p>High-performance mobile experiences for connected services, users, and teams.</p>
+            <span class="service-tag">Build</span>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <span class="service-number">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </span>
+            <h3>AI & Workflow Automation</h3>
+            <p>Automation and AI-assisted workflows that reduce manual effort and improve execution speed.</p>
+            <span class="service-tag">Automate</span>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <span class="service-number">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </span>
+            <h3>IT, Cloud & DevOps</h3>
+            <p>Infrastructure, cloud architecture, deployment pipelines, monitoring, and continuity planning.</p>
+            <span class="service-tag">Infrastructure</span>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <span class="service-number">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </span>
+            <h3>Digital Growth Funnels</h3>
+            <p>Marketing and growth systems focused on lead generation, conversions, and measurable revenue.</p>
+            <span class="service-tag">Grow</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         PROCESS STEPPER
+         
+         Five-step accordion-style component.
+         JS highlights the active step and updates
+         the glass panel description with a 3D flip.
+    ============================================== -->
+    <section id="process" class="section">
+      <div class="container process-layout">
+        <div class="section-copy reveal-left">
+          <p class="section-label">PROCESS</p>
+          <h2 class="section-title metallic-text">Built for value, resilience, and advantage.</h2>
+          <p>
+            The process follows the operational mission from the documentation:
+            create lasting value, build operational resilience, and secure
+            competitive advantage.
+          </p>
+        </div>
+
+        <div class="stepper reveal-right" data-stepper>
+          <div class="stepper-buttons" role="tablist" aria-label="Project delivery phases">
+            <button class="stepper-button active" type="button" role="tab"
+                    aria-selected="true"
+                    data-step-title="Discover"
+                    data-step-dir="left"
+                    data-step-copy="Understand the goals, existing systems, risks, workflows, and business outcomes before choosing the solution.">01</button>
+            <button class="stepper-button" type="button" role="tab"
+                    aria-selected="false"
+                    data-step-title="Architect"
+                    data-step-dir="up"
+                    data-step-copy="Design security-first foundations so protection is part of the plan, not something added at the end.">02</button>
+            <button class="stepper-button" type="button" role="tab"
+                    aria-selected="false"
+                    data-step-title="Build"
+                    data-step-dir="right"
+                    data-step-copy="Create modular digital applications, automations, infrastructure, or growth systems with sustainable engineering patterns.">03</button>
+            <button class="stepper-button" type="button" role="tab"
+                    aria-selected="false"
+                    data-step-title="Harden"
+                    data-step-dir="down"
+                    data-step-copy="Support resilience with monitoring, fail-safes, and continuity thinking where the project requires it.">04</button>
+            <button class="stepper-button" type="button" role="tab"
+                    aria-selected="false"
+                    data-step-title="Grow"
+                    data-step-dir="left"
+                    data-step-copy="Use AI, automation, and metrics-driven growth strategies to keep improving the outcome after launch.">05</button>
+          </div>
+
+          <div class="stepper-panel glass-panel" data-step-panel>
+            <span class="panel-kicker">Current phase</span>
+            <h3 data-step-title-output>Discover</h3>
+            <p data-step-copy-output>Understand the goals, existing systems, risks, workflows, and business outcomes before choosing the solution.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         WHY US — VALUE PROPOSITION GRID
+         
+         Four differentiator cards arranged in a
+         responsive 4-column layout.
+    ============================================== -->
+    <section id="why" class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-label">WHY KLICKWIZE</p>
+          <h2 class="section-title metallic-text">The rare part is the connection.</h2>
+        </div>
+
+        <div class="why-grid reveal" data-stagger>
+          <article class="why-card" data-tilt>
+            <div class="why-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Security-First Approach</h3>
+            <p>Cybersecurity is woven into the foundation of each solution.</p>
+          </article>
+
+          <article class="why-card" data-tilt>
+            <div class="why-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3>End-to-End Solutions</h3>
+            <p>Strategy, development, deployment, and management stay connected.</p>
+          </article>
+
+          <article class="why-card" data-tilt>
+            <div class="why-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>Innovation-Driven</h3>
+            <p>AI, automation, and cloud are deployed where they create real value.</p>
+          </article>
+
+          <article class="why-card" data-tilt>
+            <div class="why-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>Scalable & Future-Ready</h3>
+            <p>Solutions designed for today and architected for tomorrow.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==============================================
+         CONTACT — FORM + DIRECT CHANNEL
+         
+         Glass-panel form with backend integration
+         point in app.js. WhatsApp CTA for faster
+         initial engagement.
+    ============================================== -->
+    <section id="contact" class="section contact-section">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal-left">
+          <p class="section-label">CONTACT</p>
+          <h2 class="section-title metallic-text">Start the right conversation.</h2>
+          <p>
+            Use the form for a structured project brief, or start directly
+            on WhatsApp for a faster first touch.
+          </p>
+
+          <div class="contact-actions">
+            <a class="contact-chip whatsapp"
+               href="https://wa.me/917025703968"
+               target="_blank" rel="noreferrer">
+              WhatsApp: +91 70257 03968
+            </a>
+
+            <a class="contact-chip"
+               href="assets/docs/Documentation.pdf"
+               target="_blank" rel="noreferrer">
+              Read Company Documentation
+            </a>
+
+            <!-- Instagram placeholder — uncomment when profile is live:
+            <a class="contact-chip"
+               href="https://instagram.com/klickwize"
+               target="_blank" rel="noreferrer">
+              Instagram: @klickwize
+            </a>
+            -->
+          </div>
+        </div>
+
+        <form class="contact-form glass-panel reveal-right" data-contact-form novalidate>
+          <!-- ──────────────────────────────────────
+               BACKEND INTEGRATION NOTE
+               
+               This form is wired in app.js.
+               To activate:
+                 fetch('/api/v1/contact', {
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify(payload),
+                 });
+          ────────────────────────────────────── -->
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" autocomplete="name" required placeholder="Your name">
+          </label>
+
+          <label>
+            <span>Work Email</span>
+            <input name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+          </label>
+
+          <label>
+            <span>Service Needed</span>
+            <select name="service" required>
+              <option value="">Choose a service</option>
+              <option>Cybersecurity Solutions</option>
+              <option>Web Development</option>
+              <option>Mobile App Development</option>
+              <option>AI & Workflow Automation</option>
+              <option>IT, Cloud & DevOps</option>
+              <option>Digital Growth Funnels</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Project Context</span>
+            <textarea name="message" rows="5" required
+                      placeholder="Briefly describe your goals or challenges…"></textarea>
+          </label>
+
+          <button class="btn btn-primary magnetic" type="submit">Send Message</button>
+          <p class="form-status" data-form-status aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="bottom-fade" aria-hidden="true"></div>
+
+  <!-- ================================================
+       FOOTER — MINIMAL SIGN-OFF
+  ================================================ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p>Click Wisely. Stay Secure.</p>
+    </div>
+  </footer>
+
+
+  <!-- ================================================
+       SCRIPT BUNDLE — DEFERRED EXECUTION
+       
+       Scripts are placed before </body> so the DOM
+       is available on first execution.
+       Load order matches dependency graph:
+         navigation  (no deps)
+         splitText   (no deps)
+         decryptText (no deps)
+         spark       (no deps — canvas only)
+         stepper     (no deps)
+         capabilities (no deps — new in 0.4)
+         app         (depends on DOM structure from all above)
+  ================================================ -->
+  <script src="js/navigation.js"></script>
+  <script src="js/splitText.js"></script>
+  <script src="js/decryptText.js"></script>
+  <script src="js/spark.js"></script>
+  <script src="js/stepper.js"></script>
+  <script src="js/serviceCycle.js"></script>
+  <script src="js/app.js"></script>
+
+
+  <!-- ================================================
+       LOADER DISMISS — IIFE
+       
+       Waits for the `load` event (all sub-resources
+       resolved) then enforces a minimum display
+       duration before adding `.hidden` to trigger the
+       CSS opacity/visibility transition on the overlay.
+  ================================================ -->
+  <script>
+  (function () {
+    var loader  = document.getElementById('loader-overlay');
+    if (!loader) return;
+    var start   = Date.now();
+    var minMs   = 2500;
+
+    function dismiss() {
+      var elapsed   = Date.now() - start;
+      var remaining = Math.max(0, minMs - elapsed);
+      setTimeout(function () { loader.classList.add('hidden'); }, remaining);
+    }
+
+    if (document.readyState === 'complete') {
+      dismiss();
+    } else {
+      window.addEventListener('load', dismiss);
+    }
+  }());
+  </script>
+
+</body>
+</html>

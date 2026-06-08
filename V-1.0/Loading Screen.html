@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLICKWIZE · Loading</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000000}
+
+.lw{
+  position:fixed;inset:0;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;
+  pointer-events:none;
+}
+
+.scan{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px);
+}
+
+.cm{position:fixed;width:22px;height:22px;border-color:rgba(255,255,255,0.15);border-style:solid;z-index:3}
+.cm-tl{top:24px;left:24px;border-width:1px 0 0 1px}
+.cm-tr{top:24px;right:24px;border-width:1px 1px 0 0}
+.cm-bl{bottom:24px;left:24px;border-width:0 0 1px 1px}
+.cm-br{bottom:24px;right:24px;border-width:0 1px 1px 0}
+
+.content{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;
+  align-items:center;text-align:center;
+}
+
+.wordmark{line-height:1;animation:fadeup .9s .05s both}
+.wk{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,12vw,96px);
+  letter-spacing:.07em;
+  background:linear-gradient(150deg,#ffffff 0%,#ddeeff 45%,#a8ccff 85%,#7aebff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 16px rgba(120,180,255,0.2));
+  display:inline-block;
+}
+.ww{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,12vw,96px);
+  letter-spacing:.07em;
+  background:linear-gradient(150deg,#d8eeff 0%,#7aebff 30%,#007185 62%,#0ca0a0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 32px rgba(40, 241, 255, 0.4));
+  display:inline-block;
+}
+
+.loader-wrap{
+  margin-top:48px;
+  display:flex;flex-direction:column;
+  align-items:center;gap:14px;
+  animation:fadeup .9s .45s both;
+}
+
+.line-track{
+  width:260px;height:1px;
+  background:rgba(255,255,255,0.08);
+  border-radius:1px;
+  position:relative;overflow:hidden;
+}
+.line-fill-l,.line-fill-r{
+  position:absolute;top:0;height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#10bfcc,#4aedff,#88ccff);
+  animation:grow-line 3.2s cubic-bezier(.4,0,.15,1) .7s both;
+}
+.line-fill-l{right:50%;border-radius:1px 0 0 1px;background:linear-gradient(270deg,#4a90ff,#1040cc)}
+.line-fill-r{left:50%;border-radius:0 1px 1px 0;background:linear-gradient(90deg,#4a90ff,#88ccff)}
+@keyframes grow-line{from{width:0%}to{width:50%}}
+
+.center-dot{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:5px;height:5px;border-radius:50%;
+  background:#4affff;
+  box-shadow:0 0 8px #4ae4ff,0 0 20px rgba(74, 228, 255, 0.5);
+  animation:dot-appear .4s .65s both;
+}
+@keyframes dot-appear{from{opacity:0;transform:translate(-50%,-50%) scale(0)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+.ticker-dots{display:flex;gap:5px;margin-top:2px}
+.td{width:3px;height:3px;border-radius:50%;background:#222222;animation:td-blink 1.6s ease infinite}
+.td:nth-child(2){animation-delay:.25s}
+.td:nth-child(3){animation-delay:.5s}
+@keyframes td-blink{0%,70%,100%{background:#222222}35%{background:#555555}}
+
+@keyframes fadeup{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+#loader{opacity:1;transition:opacity .9s ease,visibility .9s ease}
+#loader.hidden{opacity:0;visibility:hidden}
+</style>
+</head>
+<body>
+
+<div class="scan"></div>
+
+<div class="cm cm-tl"></div>
+<div class="cm cm-tr"></div>
+<div class="cm cm-bl"></div>
+<div class="cm cm-br"></div>
+
+<div id="loader" class="lw">
+  <div class="content">
+    <div class="wordmark">
+      <span class="wk">KLICK</span><span class="ww">WIZE</span>
+    </div>
+
+    <div class="loader-wrap">
+      <div class="line-track">
+        <div class="line-fill-l"></div>
+        <div class="line-fill-r"></div>
+        <div class="center-dot"></div>
+      </div>
+      <div class="ticker-dots">
+        <div class="td"></div>
+        <div class="td"></div>
+        <div class="td"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const loaderEl=document.getElementById('loader');
+  setTimeout(()=>{
+    loaderEl.classList.add('hidden');
+    setTimeout(()=>{
+      window.location.href='index.html';
+    },950);
+  },5000);
+})();
+</script>
+</body>
+</html>
