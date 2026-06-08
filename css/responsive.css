@@ -231,12 +231,18 @@
 
   .footer-inner {
     display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
     justify-items: center;
     text-align: center;
   }
 
   .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     justify-content: center;
+    width: 100%;
   }
 }
 
